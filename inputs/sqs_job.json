@@ -1,0 +1,125 @@
+{
+  "workflow": {
+    "156": {
+      "inputs": {
+        "number_of_faces": 1,
+        "scale_factor": 7.5,
+        "shift_factor": 0.45000000000000007,
+        "start_index": 0,
+        "max_faces_per_image": 50,
+        "aspect_ratio": "2:3",
+        "image": [
+          "336",
+          0
+        ]
+      },
+      "class_type": "AutoCropFaces",
+      "_meta": {
+        "title": "Auto Crop Faces"
+      }
+    },
+    "231": {
+      "inputs": {
+        "prompt": "The human is wearing a white t-shirt. Keep the pose of the human. No additional items of clothing such as scarves, vests or the like.",
+        "aspect_ratio": "match_input_image",
+        "seed": 1817,
+        "output_format": "png",
+        "safety_tolerance": 2,
+        "force_rerun": false,
+        "input_image": [
+          "156",
+          0
+        ]
+      },
+      "class_type": "Replicate black-forest-labs/flux-kontext-pro",
+      "_meta": {
+        "title": "Replicate black-forest-labs/flux-kontext-pro"
+      }
+    },
+    "330": {
+      "inputs": {
+        "image": "location.png"
+      },
+      "class_type": "LoadImage",
+      "_meta": {
+        "title": "Load Image"
+      }
+    },
+    "333": {
+      "inputs": {
+        "prompt": "Portrait shot: Put the white soccer jersey on the man. Maintain all the small details of the soccer jersey including color and the logos and the embossed patern on the white surface of the jersey: The base color of the jersey is white, with a visually dynamic design featuring fine, textured, geometric embossments across the torso and lower front. These raised patterns add depth and tactile quality to the fabric, suggesting a high-performance polyester blend, commonly used in modern football kits for moisture-wicking and breathability. The material appears to be lightweight and stretchable, tailored for athletic performance.\n\nThe most striking element is the red chest band, which runs horizontally across the front. This band is stylized with jagged, fragmented edges and arrow-like design elements, giving it a contemporary, disruptive look while maintaining the club’s traditional red band motif. This chest band contains the white sponsor logo \"LBBW\" (Landesbank Baden-Württemberg), rendered in bold, capital letters with a double-equals sign in the middle.\n\nClub Crest: Located on the left chest, the VfB Stuttgart crest features a shield design. The top part has red stylized antlers and the letters “VfB” in a gothic script, while the lower yellow portion includes three black deer antlers—a symbol of Württemberg. Above the crest is a single gold star, denoting the club’s historic Bundesliga titles.\n\nManufacturer Logo: On the right chest is the JAKO logo in red. JAKO is a German sportswear company and the official kit supplier for VfB Stuttgart.\n\nAdditional Sponsor Logos:\n\nLeft Sleeve: Features the VW (Volkswagen) roundel in red.\n\nRight Sleeve: Displays the text “o24 S”, another sponsor logo in black.\n\nShoulder Dot Detail\nEach shoulder features a row of six circular dotsThese are rendered in a soft pinkish-red hue.\n\nCollar and Cut\nThe jersey has a modern V-neck collar with a slight cross-over construction, adding to the premium and sporty appearance.\nClub Crest: Located on the left chest, the VfB Stuttgart crest features a shield design. The top part has red stylized antlers and the letters “VfB” in a gothic script, while the lower yellow portion includes three black deer antlers—a symbol of Württemberg. Above the crest is a single gold star, denoting the club’s historic Bundesliga titles.\n\nManufacturer Logo: On the right chest is the JAKO logo in red. JAKO is a German sportswear company and the official kit supplier for VfB Stuttgart.\n\nAdditional Sponsor Logos:\n\nLeft Sleeve: Features the VW (Volkswagen) roundel in red.\n\nRight Sleeve: Displays the text “o24 S”, another sponsor logo in black.\n\nShoulder Dot Detail\nEach shoulder features a row of six circular dotsThese are rendered in a soft pinkish-red hue.\n\nCollar and Cut\nThe jersey has a modern V-neck collar with a slight cross-over construction, adding to the premium and sporty appearance.\n\nMaintain a correct head-to-body ratio and adjust the focal length on tghe head accordingly",
+        "aspect_ratio": "9:16",
+        "seed": 912,
+        "output_format": "png",
+        "safety_tolerance": 2,
+        "force_rerun": false,
+        "input_image_1": [
+          "231",
+          0
+        ],
+        "input_image_2": [
+          "338",
+          0
+        ]
+      },
+      "class_type": "Replicate flux-kontext-apps/multi-image-kontext-pro",
+      "_meta": {
+        "title": "Replicate flux-kontext-apps/multi-image-kontext-pro"
+      }
+    },
+    "335": {
+      "inputs": {
+        "filename_prefix": "ComfyUI",
+        "images": [
+          "337",
+          0
+        ]
+      },
+      "class_type": "SaveImage",
+      "_meta": {
+        "title": "Save Image"
+      }
+    },
+    "336": {
+      "inputs": {
+        "image": "guy.png"
+      },
+      "class_type": "LoadImage",
+      "_meta": {
+        "title": "Load Image"
+      }
+    },
+    "337": {
+      "inputs": {
+        "prompt": "Put the guy with the jersey in the soccer stadion picture\n",
+        "aspect_ratio": "9:16",
+        "seed": 936,
+        "output_format": "png",
+        "safety_tolerance": 2,
+        "force_rerun": false,
+        "input_image_1": [
+          "333",
+          0
+        ],
+        "input_image_2": [
+          "330",
+          0
+        ]
+      },
+      "class_type": "Replicate flux-kontext-apps/multi-image-kontext-pro",
+      "_meta": {
+        "title": "Replicate flux-kontext-apps/multi-image-kontext-pro"
+      }
+    },
+    "338": {
+      "inputs": {
+        "image": "jersey.png"
+      },
+      "class_type": "LoadImage",
+      "_meta": {
+        "title": "Load Image"
+      }
+    }
+  },
+  "s3_url": "s3://lbbw-trikot/output_test/test_output_123.png"
+}
