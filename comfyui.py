@@ -68,7 +68,7 @@ class ComfyUI:
             pipe.close()
 
         stdout_thread = threading.Thread(target=print_output, args=(server_process.stdout, "ComfyUI"))
-        stderr_thread = threading.Thread(target=print_output, args=(server_process.stderr, "ComfyUI-Error"))
+        stderr_thread = threading.Thread(target=print_output, args=(server_process.stderr, "ComfyUI-Log"))
         stdout_thread.start()
         stderr_thread.start()
         
