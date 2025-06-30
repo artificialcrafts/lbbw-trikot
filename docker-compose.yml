@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  worker:
+    image: lbbw-trikot-sqs:latest
+    # This is the compose equivalent of --restart always
+    restart: always 
+    environment:
+      - REPLICATE_API_TOKEN
+      - SQS_QUEUE_URL
+
+# docker-compose up --scale worker=5 -d
