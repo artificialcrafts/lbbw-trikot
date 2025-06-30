@@ -1,15 +1,7 @@
 [
   {
-    "repo": "https://github.com/artificialcrafts/ComfyUI-BiRefNet-ZHO",
-    "commit": "cb37936"
-  },
-  {
     "repo": "https://github.com/liusida/ComfyUI-AutoCropFaces",
     "commit": "b2139db"
-  },
-  {
-    "repo": "https://github.com/trumanwong/ComfyUI-NSFW-Detection",
-    "commit": "1f91d4c"
   },
   {
     "repo": "https://github.com/artificialcrafts/comfyui-replicate",
