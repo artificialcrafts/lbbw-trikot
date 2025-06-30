@@ -23,12 +23,11 @@ def download_file(url, destination_path):
     if url.startswith('s3://'):
         # Use AWS CLI for S3 URIs
         command = ["aws", "s3", "cp", url, destination_path, "--only-show-errors"]
-        print(f"Downloading with AWS CLI...")
+        print("Downloading with AWS CLI...")
     elif url.startswith(('http://', 'https://')):
-        # Use pget for HTTPS URLs
-        # -f flag will overwrite if file exists, -x will extract if it's a tarball
-        command = ["pget", "-f", url, destination_path]
-        print(f"Downloading with pget...")
+        # Use curl for HTTP/HTTPS URLs
+        command = ["curl", "-L", "-o", destination_path, url]
+        print("Downloading with curl...")
     else:
         raise ValueError(f"Unsupported URL scheme for: {url}")
 
@@ -92,11 +91,9 @@ def process_message(message, comfy_client):
 
 def main():
     if not QUEUE_URL:
-        # This check is still good as a safeguard, though it's less likely to fail now.
         print("FATAL: SQS_QUEUE_URL is not configured. Exiting.")
         sys.exit(1)
 
-    # --- (The rest of the main function is identical to the previous version) ---
     comfyUI = ComfyUI("127.0.0.1:8188")
     server_process = comfyUI.start_server(OUTPUT_DIR, INPUT_DIR)
     
@@ -136,7 +133,6 @@ def main():
     server_process.terminate()
     server_process.wait()
     print("Worker stopped.")
-
 
 if __name__ == "__main__":
     main()
