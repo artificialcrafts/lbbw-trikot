@@ -18,7 +18,7 @@ do
   docker run -d --rm \
     --name "lbbw-worker-$i" \
     -e REPLICATE_API_TOKEN \
-    -e SQS_QUEUE_URL="https://sqs.your-region.amazonaws.com/123456789012/lbbw-trikot-jobs" \
+    -e SQS_QUEUE_URL="https://sqs.eu-central-1.amazonaws.com/320819923469/lbbw-trikot-queue" \
     "$IMAGE_NAME"
 done
 
