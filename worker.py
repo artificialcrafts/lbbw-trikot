@@ -1,4 +1,4 @@
-# worker.py
+# worker.py (Final Version with S3 Input and Output)
 
 import os
 import subprocess
@@ -11,24 +11,26 @@ from pathlib import Path
 from comfyui import ComfyUI
 
 # --- Configuration ---
-# These are now read from environment variables for flexibility
-QUEUE_URL = "https://sqs.eu-central-1.amazonaws.com/320819923469/lbbw-trikot-queue"
-AWS_REGION = os.environ.get("AWS_REGION", "eu-central-1") # Default to Frankfurt, change if needed
-
-# Define temporary directories inside the container
+QUEUE_URL = os.environ.get("SQS_QUEUE_URL", "https://sqs.eu-central-1.amazonaws.com/320819923469/lbbw-trikot-queue")
+AWS_REGION = os.environ.get("AWS_REGION", "eu-central-1")
 OUTPUT_DIR = "/tmp/outputs"
 INPUT_DIR = "/tmp/inputs"
 
-def s3_upload(local_path, s3_url):
-    """Uploads a file to S3 using the AWS CLI."""
+def s3_operation(s3_path_from, local_path_to, direction='download'):
+    """Handles both upload and download using AWS CLI."""
     try:
-        print(f"Uploading {local_path} to {s3_url}...")
-        # Use --only-show-errors to keep the log clean on success
-        subprocess.run(["aws", "s3", "cp", str(local_path), s3_url, "--only-show-errors"], check=True)
-        print("Upload successful.")
+        if direction == 'download':
+            print(f"Downloading {s3_path_from} to {local_path_to}...")
+            command = ["aws", "s3", "cp", s3_path_from, local_path_to, "--only-show-errors"]
+        else: # upload
+            print(f"Uploading {local_path_to} to {s3_path_from}...")
+            command = ["aws", "s3", "cp", local_path_to, s3_path_from, "--only-show-errors"]
+        
+        subprocess.run(command, check=True)
+        print(f"{direction.capitalize()} successful.")
     except subprocess.CalledProcessError as e:
-        print(f"ERROR: S3 upload failed: {e}")
-        raise # Re-raise the exception to signal that the job failed
+        print(f"ERROR: S3 {direction} failed: {e}")
+        raise
 
 def process_message(message, comfy_client):
     """Processes a single job message from the SQS queue."""
@@ -37,19 +39,16 @@ def process_message(message, comfy_client):
     try:
         job_data = json.loads(message['Body'])
         
-        # Extract data from the job message
-        workflow_data = job_data['workflow']
-        s3_url = job_data['s3_url']
-        
         # --- Prepare Inputs ---
-        # The worker needs to clean the directories for each new job
         comfy_client.cleanup([OUTPUT_DIR, INPUT_DIR, "ComfyUI/temp"])
 
-        # This example assumes inputs are defined in the workflow.
-        # If you were downloading them from S3, that logic would go here.
-        # For now, we'll assume the workflow points to public URLs or uses pre-baked inputs.
+        if 'inputs' in job_data:
+            for local_filename, s3_uri in job_data['inputs'].items():
+                destination_path = os.path.join(INPUT_DIR, local_filename)
+                s3_operation(s3_uri, destination_path, direction='download')
         
-        # --- Run the workflow ---
+        # --- Run Workflow ---
+        workflow_data = job_data['workflow']
         wf = comfy_client.load_workflow(workflow_data)
         comfy_client.connect()
         comfy_client.run_workflow(wf)
@@ -60,12 +59,13 @@ def process_message(message, comfy_client):
         
         generated_file = output_files[0]
         
-        s3_upload(generated_file, s3_url)
+        # --- Upload Result ---
+        s3_url = job_data['s3_url']
+        s3_operation(s3_url, str(generated_file), direction='upload')
 
     except Exception as e:
         print(f"ERROR processing job: {e}")
-        # Return False to indicate failure, so the message is not deleted from the queue
-        return False
+        return False # Indicate failure
 
     return True # Indicate success
 
@@ -74,38 +74,34 @@ def main():
         print("FATAL: SQS_QUEUE_URL environment variable not set. Exiting.")
         sys.exit(1)
 
-    # --- 1. Start ComfyUI Server (once) ---
+    # --- Start ComfyUI Server (once) ---
     comfyUI = ComfyUI("127.0.0.1:8188")
     server_process = comfyUI.start_server(OUTPUT_DIR, INPUT_DIR)
     
-    # Initialize the SQS client
     sqs = boto3.client('sqs', region_name=AWS_REGION)
     
-    print(f"Worker started successfully. Polling SQS queue: {QUEUE_URL}")
+    print(f"Worker started. Polling SQS queue: {QUEUE_URL}")
     
-    # --- 2. The Main Worker Loop ---
+    # --- Main Worker Loop ---
     while True:
         try:
             response = sqs.receive_message(
                 QueueUrl=QUEUE_URL,
                 MaxNumberOfMessages=1,
-                WaitTimeSeconds=20 # Use long polling
+                WaitTimeSeconds=20
             )
 
             if "Messages" in response:
                 message = response["Messages"][0]
                 receipt_handle = message['ReceiptHandle']
                 
-                success = process_message(message, comfyUI)
-                
-                if success:
+                if process_message(message, comfyUI):
                     sqs.delete_message(
                         QueueUrl=QUEUE_URL,
                         ReceiptHandle=receipt_handle
                     )
                     print("Job complete. Message deleted. Polling for next job...")
             else:
-                # This is normal, it just means the queue was empty
                 print(".", end="", flush=True)
 
         except KeyboardInterrupt:
@@ -113,10 +109,9 @@ def main():
             break
         except Exception as e:
             print(f"\nAn unexpected error occurred in the main loop: {e}")
-            print("Sleeping for 10 seconds before retrying...")
             time.sleep(10)
     
-    # --- 3. Shutdown ---
+    # --- Shutdown ---
     print("Shutting down ComfyUI server...")
     server_process.terminate()
     server_process.wait()
