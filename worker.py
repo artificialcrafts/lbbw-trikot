@@ -1,4 +1,4 @@
-# worker.py (Final Version with S3 Input and Output)
+# worker.py
 
 import os
 import subprocess
@@ -11,12 +11,16 @@ import random
 from pathlib import Path
 from comfyui import ComfyUI
 
-# --- Configuration ---
+# --- Configuration with a Default ---
+# If the SQS_QUEUE_URL environment variable is not set, it will use the default value.
 QUEUE_URL = os.environ.get("SQS_QUEUE_URL", "https://sqs.eu-central-1.amazonaws.com/320819923469/lbbw-trikot-queue")
 AWS_REGION = os.environ.get("AWS_REGION", "eu-central-1")
+
+# Define temporary directories inside the container
 OUTPUT_DIR = "/tmp/outputs"
 INPUT_DIR = "/tmp/inputs"
 
+# ... (the rest of the s3_operation and process_message functions remain exactly the same as before) ...
 def s3_operation(s3_path_from, local_path_to, direction='download'):
     """Handles both upload and download using AWS CLI."""
     try:
@@ -40,7 +44,6 @@ def process_message(message, comfy_client):
     try:
         job_data = json.loads(message['Body'])
         
-        # --- Prepare Inputs ---
         comfy_client.cleanup([OUTPUT_DIR, INPUT_DIR, "ComfyUI/temp"])
 
         if 'inputs' in job_data:
@@ -48,8 +51,15 @@ def process_message(message, comfy_client):
                 destination_path = os.path.join(INPUT_DIR, local_filename)
                 s3_operation(s3_uri, destination_path, direction='download')
         
-        # --- Run Workflow ---
         workflow_data = job_data['workflow']
+        for node in workflow_data.values():
+            if node["class_type"].startswith("Replicate"):
+                node["inputs"]["force_rerun"] = True
+                if "seed" in node["inputs"]:
+                    new_seed = random.randint(0, 2**32 - 1)
+                    print(f"Randomizing seed for node to: {new_seed}")
+                    node["inputs"]["seed"] = new_seed
+        
         wf = comfy_client.load_workflow(workflow_data)
         comfy_client.connect()
         comfy_client.run_workflow(wf)
@@ -59,14 +69,12 @@ def process_message(message, comfy_client):
             raise RuntimeError("Workflow did not generate any output files.")
         
         generated_file = output_files[0]
-        
-        # --- Upload Result ---
         s3_url = job_data['s3_url']
         s3_operation(s3_url, str(generated_file), direction='upload')
 
     except Exception as e:
         print(f"ERROR processing job: {e}")
-        return False # Indicate failure
+        return False
 
     return True
 
@@ -76,15 +84,14 @@ def main():
         print("FATAL: SQS_QUEUE_URL is not configured. Exiting.")
         sys.exit(1)
 
-    # --- Start ComfyUI Server (once) ---
+    # --- (The rest of the main function is identical to the previous version) ---
     comfyUI = ComfyUI("127.0.0.1:8188")
     server_process = comfyUI.start_server(OUTPUT_DIR, INPUT_DIR)
     
     sqs = boto3.client('sqs', region_name=AWS_REGION)
     
-    print(f"Worker started. Polling SQS queue: {QUEUE_URL}")
+    print(f"Worker started successfully. Polling SQS queue: {QUEUE_URL}")
     
-    # --- Main Worker Loop ---
     while True:
         try:
             response = sqs.receive_message(
@@ -113,7 +120,6 @@ def main():
             print(f"\nAn unexpected error occurred in the main loop: {e}")
             time.sleep(10)
     
-    # --- Shutdown ---
     print("Shutting down ComfyUI server...")
     server_process.terminate()
     server_process.wait()
