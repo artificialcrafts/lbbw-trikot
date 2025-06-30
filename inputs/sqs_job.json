@@ -127,5 +127,5 @@
             }
         }
     },
-    "s3_url": "s3://lbbw-trikot/output_test/test_output_123.png"
+    "s3_url": "s3://lbbw-trikot/output/test_output_123.png"
 }
