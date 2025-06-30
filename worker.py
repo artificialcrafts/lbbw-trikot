@@ -1,5 +1,3 @@
-# worker.py
-
 import os
 import subprocess
 import time
@@ -7,34 +5,49 @@ import json
 import boto3
 import sys
 import shutil
-import random
+import urllib.parse
 from pathlib import Path
 from comfyui import ComfyUI
 
-# --- Configuration with a Default ---
-# If the SQS_QUEUE_URL environment variable is not set, it will use the default value.
+# --- Configuration ---
 QUEUE_URL = os.environ.get("SQS_QUEUE_URL", "https://sqs.eu-central-1.amazonaws.com/320819923469/lbbw-trikot-queue")
 AWS_REGION = os.environ.get("AWS_REGION", "eu-central-1")
-
-# Define temporary directories inside the container
 OUTPUT_DIR = "/tmp/outputs"
 INPUT_DIR = "/tmp/inputs"
 
-# ... (the rest of the s3_operation and process_message functions remain exactly the same as before) ...
-def s3_operation(s3_path_from, local_path_to, direction='download'):
-    """Handles both upload and download using AWS CLI."""
+def download_file(url, destination_path):
+    """
+    Downloads a file from either an S3 URI or an HTTPS URL.
+    """
+    print(f"Preparing to download from: {url}")
+    if url.startswith('s3://'):
+        # Use AWS CLI for S3 URIs
+        command = ["aws", "s3", "cp", url, destination_path, "--only-show-errors"]
+        print(f"Downloading with AWS CLI...")
+    elif url.startswith(('http://', 'https://')):
+        # Use pget for HTTPS URLs
+        # -f flag will overwrite if file exists, -x will extract if it's a tarball
+        command = ["pget", "-f", url, destination_path]
+        print(f"Downloading with pget...")
+    else:
+        raise ValueError(f"Unsupported URL scheme for: {url}")
+
     try:
-        if direction == 'download':
-            print(f"Downloading {s3_path_from} to {local_path_to}...")
-            command = ["aws", "s3", "cp", s3_path_from, local_path_to, "--only-show-errors"]
-        else: # upload
-            print(f"Uploading {local_path_to} to {s3_path_from}...")
-            command = ["aws", "s3", "cp", local_path_to, s3_path_from, "--only-show-errors"]
-        
         subprocess.run(command, check=True)
-        print(f"{direction.capitalize()} successful.")
+        print(f"Successfully downloaded to {destination_path}")
     except subprocess.CalledProcessError as e:
-        print(f"ERROR: S3 {direction} failed: {e}")
+        print(f"ERROR: Download failed for {url}. Error: {e}")
+        raise
+
+def upload_file_to_s3(local_path, s3_url):
+    """Uploads a file to S3 using the AWS CLI."""
+    try:
+        print(f"Uploading {local_path} to {s3_url}...")
+        command = ["aws", "s3", "cp", local_path, s3_url, "--only-show-errors"]
+        subprocess.run(command, check=True)
+        print("Upload successful.")
+    except subprocess.CalledProcessError as e:
+        print(f"ERROR: S3 upload failed: {e}")
         raise
 
 def process_message(message, comfy_client):
@@ -43,23 +56,22 @@ def process_message(message, comfy_client):
     
     try:
         job_data = json.loads(message['Body'])
+        workflow_data = job_data['workflow']
         
         comfy_client.cleanup([OUTPUT_DIR, INPUT_DIR, "ComfyUI/temp"])
 
+        # --- Prepare Inputs and Dynamically Update Workflow ---
         if 'inputs' in job_data:
-            for local_filename, s3_uri in job_data['inputs'].items():
-                destination_path = os.path.join(INPUT_DIR, local_filename)
-                s3_operation(s3_uri, destination_path, direction='download')
+            for local_filename, uri in job_data['inputs'].items():
+                local_dest_path = os.path.join(INPUT_DIR, local_filename)
+                download_file(uri, local_dest_path)
+                
+                # Find any LoadImage node that expects this filename and confirm
+                for node in workflow_data.values():
+                    if node.get("class_type") == "LoadImage" and node["inputs"].get("image") == local_filename:
+                        print(f"Confirmed workflow node will use downloaded file: {local_filename}")
         
-        workflow_data = job_data['workflow']
-        for node in workflow_data.values():
-            if node["class_type"].startswith("Replicate"):
-                node["inputs"]["force_rerun"] = True
-                if "seed" in node["inputs"]:
-                    new_seed = random.randint(0, 2**32 - 1)
-                    print(f"Randomizing seed for node to: {new_seed}")
-                    node["inputs"]["seed"] = new_seed
-        
+        # --- Run Workflow ---
         wf = comfy_client.load_workflow(workflow_data)
         comfy_client.connect()
         comfy_client.run_workflow(wf)
@@ -70,7 +82,7 @@ def process_message(message, comfy_client):
         
         generated_file = output_files[0]
         s3_url = job_data['s3_url']
-        s3_operation(s3_url, str(generated_file), direction='upload')
+        upload_file_to_s3(str(generated_file), s3_url)
 
     except Exception as e:
         print(f"ERROR processing job: {e}")
