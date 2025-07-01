@@ -51,7 +51,7 @@ class ComfyUI:
 
     def run_server(self, output_directory, input_directory):
         # This method is now simplified to just start and return the process
-        command = f"python3 ./ComfyUI/main.py --cpu --output-directory {output_directory} --input-directory {input_directory} --disable-metadata"
+        command = f"python3 ./ComfyUI/main.py --output-directory {output_directory} --input-directory {input_directory} --disable-metadata"
 
         print(f"[ComfyUI] Starting server with command: {command}")
         server_process = subprocess.Popen(

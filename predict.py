@@ -35,7 +35,7 @@ def main():
 
     # --- 2. Start Server ---
     server_command = [
-        "python3", "/app/ComfyUI/main.py", "--listen", "0.0.0.0", "--cpu",
+        "python3", "/app/ComfyUI/main.py", "--listen", "0.0.0.0",
         "--output-directory", OUTPUT_DIR, "--input-directory", INPUT_DIR
     ]
     server_process = subprocess.Popen(server_command)
