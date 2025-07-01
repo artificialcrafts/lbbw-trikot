@@ -6,5 +6,21 @@
   {
     "repo": "https://github.com/artificialcrafts/comfyui-replicate",
     "commit": "1abd5f9"
+  },
+  {
+    "repo": "https://github.com/kijai/ComfyUI-Florence2",
+    "commit": "de485b6"
+  },
+  {
+    "repo": "https://github.com/storyicon/comfyui_segment_anything",
+    "commit": "ab63955"
+  },
+  {
+    "repo": "https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch",
+    "commit": "b432b24"
+  },
+  {
+    "repo": "https://github.com/sipherxyz/comfyui-art-venture",
+    "commit": "2503bc2"
   }
 ]

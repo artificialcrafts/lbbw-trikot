@@ -1,3 +1,9 @@
+## 2025-07-01
+- [Add comfyui-art-venture](https://github.com/sipherxyz/comfyui-art-venture) custom node
+- [Add ComfyUI-Inpaint-CropAndStitch](https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch) custom node
+- [Add comfyui_segment_anything](https://github.com/storyicon/comfyui_segment_anything) custom node
+
+- [Add ComfyUI-Florence2](https://github.com/kijai/ComfyUI-Florence2) custom node
 ## 2025-06-27
 - [Add comfyui-replicate](https://github.com/artificialcrafts/comfyui-replicate) custom node
 - [Add image-resize-comfyui](https://github.com/palant/image-resize-comfyui) custom node
