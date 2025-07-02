@@ -1,32 +1,42 @@
+# --- ComfyUI core and related packages ---
+comfyui-frontend-package==1.23.4
+comfyui-workflow-templates==0.1.30
+comfyui-embedded-docs==0.2.3
+
+# --- Torch & dependencies ---
 torch
 torchvision
 torchaudio
 torchsde
-einops
+
+# --- HuggingFace & Transformers ---
 transformers>=4.49.0
 tokenizers>=0.13.3
 sentencepiece
-safetensors>=0.3.0
-aiohttp
+huggingface_hub[hf-transfer]
+
+# --- Diffusers & AI tools ---
+diffusers>=0.31.0
 accelerate>=1.1.1
-pyyaml
+safetensors>=0.4.2
+
+# --- General ML/AI libraries ---
+numpy>=1.25.0
+einops
 Pillow
 scipy
 tqdm
 psutil
+kornia>=0.7.1
 spandrel
 soundfile
-kornia>=0.7.1
-websocket-client==1.6.3
-diffusers>=0.31.0
 av>=14.2.0
-comfyui-frontend-package==1.22.2
-comfyui-workflow-templates==0.1.29
+pydantic~=2.0
+pydantic-settings~=2.0
+websocket-client==1.6.3
 dill
 webcolors
 albumentations
-pydantic~=2.0
-pydantic-settings~=2.0
 cmake
 imageio
 joblib
@@ -42,11 +52,12 @@ onnx
 segment-anything
 piexif
 ultralytics!=8.0.177
+ultralytics
 timm
 importlib_metadata
 opencv-python-headless>=4.0.1.24
+opencv-python
 filelock
-numpy
 scikit-image
 python-dateutil
 mediapipe
@@ -63,17 +74,14 @@ color-matcher
 facexlib
 open-clip-torch>=2.24.0
 pytorch-lightning>=2.2.1
-huggingface_hub[hf-transfer]
 iopath
 alembic
-comfyui-embedded-docs
 simpleeval
 replicate
 cog
 loguru
 prettytable
 deepface==0.0.93
-ultralytics
 tf-keras==2.17.0
 google-generativeai>0.4.1
 volcengine
@@ -82,7 +90,16 @@ peft
 segment_anything
 fairscale
 pycocoevalcap
-opencv-python
 qrcode[pil]
-pytorch_lightning
-omegaconf
+# The two 'omegaconf' and 'pytorch-lightning' lines above are intentional due to multiple uses.
+
+# --- Web and async tools ---
+aiohttp>=3.11.8
+yarl>=1.18.0
+
+# --- Database & migration ---
+alembic
+SQLAlchemy
+
+# --- Misc ---
+pyyaml
