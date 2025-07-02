@@ -1,0 +1,467 @@
+{
+  "414": {
+    "inputs": {
+      "images": [
+        "415",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "415": {
+    "inputs": {
+      "number_of_faces": 1,
+      "scale_factor": 5.5,
+      "shift_factor": 0.5000000000000001,
+      "start_index": 0,
+      "max_faces_per_image": 50,
+      "aspect_ratio": "2:3",
+      "image": [
+        "430",
+        0
+      ]
+    },
+    "class_type": "AutoCropFaces",
+    "_meta": {
+      "title": "Auto Crop Faces"
+    }
+  },
+  "416": {
+    "inputs": {
+      "images": [
+        "428",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "428": {
+    "inputs": {
+      "prompt": "medium close up of the woman is wearing a loose fitting grey tank top. Present the person with natural, balanced body proportions, photographed with a standard portrait lens from a comfortable distance. The head should appear proportionate to the body, with no exaggeration or distortion. Revert any lens distortion. Keep the facial features, hair and expression of the person consistent. Change the background to a massive celebration of soccer fans from within the crowd. The camera follows a large group of people walking down a narrow European city street. An immense shower of red and white rectangular confetti flutters down, filling the air. A large red and white flag is being waved in the distance, partially obscured by the crowd and confetti. Red and white rectangular confetti also blurry in the foreground. Keep everything consistent.\n",
+      "aspect_ratio": "2:3",
+      "seed": 817,
+      "output_format": "png",
+      "safety_tolerance": 2,
+      "force_rerun": false,
+      "input_image_1": [
+        "415",
+        0
+      ],
+      "input_image_2": [
+        "431",
+        0
+      ]
+    },
+    "class_type": "Replicate flux-kontext-apps/multi-image-kontext-pro",
+    "_meta": {
+      "title": "Replicate flux-kontext-apps/multi-image-kontext-pro"
+    }
+  },
+  "429": {
+    "inputs": {
+      "prompt": "Put the white soccer jersey on the woman and keep the original background. The woman is standing in a massive shower of red and white rectangular confetti filling the air. Confetti is flying everywhere. Maintain all the small details of the soccer jersey including color and the logos and the embossed pattern on the white fabric of the jersey: The base color of the jersey is white, with a visually dynamic design featuring fine, textured, geometric embossments across the torso and lower front. These raised patterns add depth and tactile quality to the fabric, suggesting a high-performance polyester blend, commonly used in modern football kits for moisture-wicking and breathability. The material appears to be lightweight and stretchable, tailored for athletic performance.\n\nThe bottom left part of the jersey is clean white with the embossed pattern without other elements.\n\nThe most striking element is the red chest band, which runs horizontally across the front. This band is stylized with jagged, fragmented edges and arrow-like design elements, giving it a contemporary, disruptive look while maintaining the club’s traditional red band motif. This chest band contains the white sponsor logo \"LBBW\" (Landesbank Baden-Württemberg), rendered in bold, capital letters with a double-equals sign in the middle.\n\nClub Crest: Located on the left chest, the VfB Stuttgart crest features a shield design. The top part has red stylized antlers and the letters “VfB” in a gothic script, while the lower yellow portion includes three black deer antlers—a symbol of Württemberg. Above the crest is a single gold star, denoting the club’s historic Bundesliga titles.\n\nManufacturer Logo: On the right chest is the JAKO logo in red.\n\nAdditional Sponsor Logos: \n\nRight Sleeve: Displays the black two-line \"·h so\" logo in lowercase Helvetica Bold font.\n\nShoulder Dot Detail\nEach shoulder features a row of five circles, consisting of the circular JAKO logomark next to the collar and more dynamic circular dot patterns arranged in a row, representing the iconic \"JAKO Dots\" brand element in red.\n\nCollar and Cut\nThe jersey has a modern V-neck collar with a slight cross-over construction at the sharp corner in the center, adding to the premium and sporty appearance.\n\nKeep face, hair and scenic photo background consistent.\nEnhance the facial details.\n",
+      "aspect_ratio": "9:16",
+      "seed": 1478,
+      "output_format": "png",
+      "safety_tolerance": 2,
+      "force_rerun": true,
+      "input_image_1": [
+        "428",
+        0
+      ],
+      "input_image_2": [
+        "432",
+        0
+      ]
+    },
+    "class_type": "Replicate flux-kontext-apps/multi-image-kontext-pro",
+    "_meta": {
+      "title": "Replicate flux-kontext-apps/multi-image-kontext-pro"
+    }
+  },
+  "430": {
+    "inputs": {
+      "image": "1afb7205-6acd-45a4-8134-960ff48e2244.jpg"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "431": {
+    "inputs": {
+      "image": "5.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "432": {
+    "inputs": {
+      "image": "Trikot_a.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "437": {
+    "inputs": {
+      "mask": [
+        "454",
+        1
+      ]
+    },
+    "class_type": "MaskPreview",
+    "_meta": {
+      "title": "MaskPreview"
+    }
+  },
+  "438": {
+    "inputs": {
+      "model": "microsoft/Florence-2-base",
+      "precision": "fp16",
+      "attention": "sdpa",
+      "convert_to_safetensors": false
+    },
+    "class_type": "DownloadAndLoadFlorence2Model",
+    "_meta": {
+      "title": "DownloadAndLoadFlorence2Model"
+    }
+  },
+  "439": {
+    "inputs": {
+      "index": "0",
+      "batch": false,
+      "data": [
+        "454",
+        3
+      ]
+    },
+    "class_type": "Florence2toCoordinates",
+    "_meta": {
+      "title": "Florence2 Coordinates"
+    }
+  },
+  "440": {
+    "inputs": {
+      "images": [
+        "429",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "443": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "crop": "disabled",
+      "images": [
+        "451",
+        0
+      ]
+    },
+    "class_type": "ImageScaleDown",
+    "_meta": {
+      "title": "Scale Down"
+    }
+  },
+  "444": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "451",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "445": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "458",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "446": {
+    "inputs": {
+      "gray_scale": false,
+      "grain_type": "Fine",
+      "grain_sat": 0.5,
+      "grain_power": 0.7,
+      "shadows": 0.2,
+      "highs": 0.2,
+      "scale": 1,
+      "sharpen": 0,
+      "src_gamma": 1,
+      "seed": 86158681451946,
+      "image": [
+        "461",
+        0
+      ]
+    },
+    "class_type": "ProPostFilmGrain",
+    "_meta": {
+      "title": "ProPostFilmGrain"
+    }
+  },
+  "447": {
+    "inputs": {
+      "filename_prefix": "JvM_LogoSwap",
+      "images": [
+        "446",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "448": {
+    "inputs": {
+      "images": [
+        "457",
+        1
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "449": {
+    "inputs": {
+      "image": "Logo_4.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "LOGO"
+    }
+  },
+  "450": {
+    "inputs": {
+      "image": [
+        "457",
+        1
+      ]
+    },
+    "class_type": "GetImageSize",
+    "_meta": {
+      "title": "Get Image Size"
+    }
+  },
+  "451": {
+    "inputs": {
+      "prompt": "Replace the soccer team logo emblem on the jersey with the highres version of image 2 on exact the same position, size and rotation. Keep the details like the 1893 year a White jersey background and match color from image 1. Do not show the star above the emblem, just the logo.",
+      "aspect_ratio": "1:1",
+      "seed": 1655,
+      "output_format": "png",
+      "safety_tolerance": 2,
+      "force_rerun": true,
+      "input_image_1": [
+        "457",
+        1
+      ],
+      "input_image_2": [
+        "449",
+        0
+      ]
+    },
+    "class_type": "Replicate flux-kontext-apps/multi-image-kontext-pro",
+    "_meta": {
+      "title": "Replicate flux-kontext-apps/multi-image-kontext-pro"
+    }
+  },
+  "452": {
+    "inputs": {
+      "width": [
+        "450",
+        0
+      ],
+      "height": [
+        "450",
+        1
+      ],
+      "crop": "disabled",
+      "images": [
+        "458",
+        0
+      ]
+    },
+    "class_type": "ImageScaleDown",
+    "_meta": {
+      "title": "Scale Down"
+    }
+  },
+  "453": {
+    "inputs": {
+      "keep_model_loaded": true,
+      "individual_objects": false,
+      "sam2_model": [
+        "455",
+        0
+      ],
+      "image": [
+        "429",
+        0
+      ],
+      "coordinates_positive": [
+        "439",
+        0
+      ]
+    },
+    "class_type": "Sam2Segmentation",
+    "_meta": {
+      "title": "Sam2Segmentation"
+    }
+  },
+  "454": {
+    "inputs": {
+      "text_input": "A shield-shaped football club logo with red Gothic \"VfB\" letters on a white upper half, the numbers \"18\" and \"93\" below the letters, and a yellow lower half with three black stag antlers stacked horizontally; red border outline the entire emblem",
+      "task": "caption_to_phrase_grounding",
+      "fill_mask": true,
+      "keep_model_loaded": false,
+      "max_new_tokens": 1024,
+      "num_beams": 3,
+      "do_sample": true,
+      "output_mask_select": "",
+      "seed": 701350825990295,
+      "image": [
+        "429",
+        0
+      ],
+      "florence2_model": [
+        "438",
+        0
+      ]
+    },
+    "class_type": "Florence2Run",
+    "_meta": {
+      "title": "Florence2Run"
+    }
+  },
+  "455": {
+    "inputs": {
+      "model": "sam2_hiera_base_plus.safetensors",
+      "segmentor": "single_image",
+      "device": "cuda",
+      "precision": "fp16"
+    },
+    "class_type": "DownloadAndLoadSAM2Model",
+    "_meta": {
+      "title": "(Down)Load SAM2Model"
+    }
+  },
+  "456": {
+    "inputs": {
+      "stitcher": [
+        "457",
+        0
+      ],
+      "inpainted_image": [
+        "452",
+        0
+      ]
+    },
+    "class_type": "InpaintStitchImproved",
+    "_meta": {
+      "title": "✂️ Inpaint Stitch (Improved)"
+    }
+  },
+  "457": {
+    "inputs": {
+      "downscale_algorithm": "bilinear",
+      "upscale_algorithm": "bicubic",
+      "preresize": false,
+      "preresize_mode": "ensure minimum resolution",
+      "preresize_min_width": 1024,
+      "preresize_min_height": 1024,
+      "preresize_max_width": 16384,
+      "preresize_max_height": 16384,
+      "mask_fill_holes": true,
+      "mask_expand_pixels": 0,
+      "mask_invert": false,
+      "mask_blend_pixels": 32,
+      "mask_hipass_filter": 0.1,
+      "extend_for_outpainting": false,
+      "extend_up_factor": 1,
+      "extend_down_factor": 1,
+      "extend_left_factor": 1,
+      "extend_right_factor": 1,
+      "context_from_mask_extend_factor": 1.2,
+      "output_resize_to_target_size": true,
+      "output_target_width": 512,
+      "output_target_height": 512,
+      "output_padding": "32",
+      "image": [
+        "429",
+        0
+      ],
+      "mask": [
+        "453",
+        0
+      ]
+    },
+    "class_type": "InpaintCropImproved",
+    "_meta": {
+      "title": "✂️ Inpaint Crop (Improved)"
+    }
+  },
+  "458": {
+    "inputs": {
+      "model": "RMBG-2.0",
+      "sensitivity": 1,
+      "process_res": 512,
+      "mask_blur": 7,
+      "mask_offset": 1,
+      "invert_output": false,
+      "refine_foreground": false,
+      "background": "Alpha",
+      "image": [
+        "443",
+        0
+      ]
+    },
+    "class_type": "RMBG",
+    "_meta": {
+      "title": "Remove Background (RMBG)"
+    }
+  },
+  "461": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "width": 1080,
+      "height": 1920,
+      "crop": "disabled",
+      "image": [
+        "456",
+        0
+      ]
+    },
+    "class_type": "ImageScale",
+    "_meta": {
+      "title": "Upscale Image"
+    }
+  }
+}

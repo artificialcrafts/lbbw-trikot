@@ -1,0 +1,393 @@
+{
+  "415": {
+    "inputs": {
+      "number_of_faces": 1,
+      "scale_factor": 5.5,
+      "shift_factor": 0.5000000000000001,
+      "start_index": 0,
+      "max_faces_per_image": 50,
+      "aspect_ratio": "2:3",
+      "image": [
+        "430",
+        0
+      ]
+    },
+    "class_type": "AutoCropFaces",
+    "_meta": {
+      "title": "Auto Crop Faces"
+    }
+  },
+  "428": {
+    "inputs": {
+      "prompt": "",
+      "aspect_ratio": "2:3",
+      "seed": 1065,
+      "output_format": "png",
+      "safety_tolerance": 2,
+      "force_rerun": false,
+      "input_image_1": [
+        "415",
+        0
+      ],
+      "input_image_2": [
+        "431",
+        0
+      ]
+    },
+    "class_type": "Replicate flux-kontext-apps/multi-image-kontext-pro",
+    "_meta": {
+      "title": "FLUX KONTEXT: PUT HUMAN IN SCENE AND GREY SHIRT"
+    }
+  },
+  "429": {
+    "inputs": {
+      "prompt": "",
+      "aspect_ratio": "9:16",
+      "seed": 1726,
+      "output_format": "png",
+      "safety_tolerance": 2,
+      "force_rerun": true,
+      "input_image_1": [
+        "428",
+        0
+      ],
+      "input_image_2": [
+        "432",
+        0
+      ]
+    },
+    "class_type": "Replicate flux-kontext-apps/multi-image-kontext-pro",
+    "_meta": {
+      "title": "FLUX KONTEXT: PUT SOCCER JERSEY ON THE HUMAN"
+    }
+  },
+  "430": {
+    "inputs": {
+      "image": "guy2.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "USER"
+    }
+  },
+  "431": {
+    "inputs": {
+      "image": "2.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "SCENE"
+    }
+  },
+  "432": {
+    "inputs": {
+      "image": "Trikot_a.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "JERSEY"
+    }
+  },
+  "437": {
+    "inputs": {
+      "mask": [
+        "454",
+        1
+      ]
+    },
+    "class_type": "MaskPreview",
+    "_meta": {
+      "title": "MaskPreview"
+    }
+  },
+  "438": {
+    "inputs": {
+      "model": "microsoft/Florence-2-base",
+      "precision": "fp16",
+      "attention": "sdpa",
+      "convert_to_safetensors": false
+    },
+    "class_type": "DownloadAndLoadFlorence2Model",
+    "_meta": {
+      "title": "DownloadAndLoadFlorence2Model"
+    }
+  },
+  "439": {
+    "inputs": {
+      "index": "0",
+      "batch": false,
+      "data": [
+        "454",
+        3
+      ]
+    },
+    "class_type": "Florence2toCoordinates",
+    "_meta": {
+      "title": "Florence2 Coordinates"
+    }
+  },
+  "443": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "crop": "disabled",
+      "images": [
+        "451",
+        0
+      ]
+    },
+    "class_type": "ImageScaleDown",
+    "_meta": {
+      "title": "Scale Down"
+    }
+  },
+  "446": {
+    "inputs": {
+      "gray_scale": false,
+      "grain_type": "Fine",
+      "grain_sat": 0.5,
+      "grain_power": 0.7,
+      "shadows": 0.2,
+      "highs": 0.2,
+      "scale": 1,
+      "sharpen": 0,
+      "src_gamma": 1,
+      "seed": 118392502590327,
+      "image": [
+        "461",
+        0
+      ]
+    },
+    "class_type": "ProPostFilmGrain",
+    "_meta": {
+      "title": "ProPostFilmGrain"
+    }
+  },
+  "447": {
+    "inputs": {
+      "filename_prefix": "LBBW_VfB",
+      "images": [
+        "446",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "SAVE FINAL IMAGE"
+    }
+  },
+  "449": {
+    "inputs": {
+      "image": "Logo_4.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "LOGO"
+    }
+  },
+  "450": {
+    "inputs": {
+      "image": [
+        "457",
+        1
+      ]
+    },
+    "class_type": "GetImageSize",
+    "_meta": {
+      "title": "Get Image Size"
+    }
+  },
+  "451": {
+    "inputs": {
+      "prompt": "Replace the soccer team logo emblem on the jersey with the highres version of image 2 on exact the same position, size and rotation. Keep the details like the 1893 year a White jersey background and match color from image 1. Do not show the star above the emblem, just the logo.",
+      "aspect_ratio": "1:1",
+      "seed": 1903,
+      "output_format": "png",
+      "safety_tolerance": 2,
+      "force_rerun": true,
+      "input_image_1": [
+        "457",
+        1
+      ],
+      "input_image_2": [
+        "449",
+        0
+      ]
+    },
+    "class_type": "Replicate flux-kontext-apps/multi-image-kontext-pro",
+    "_meta": {
+      "title": "FLUX KONTEXT: LOGO FIX"
+    }
+  },
+  "452": {
+    "inputs": {
+      "width": [
+        "450",
+        0
+      ],
+      "height": [
+        "450",
+        1
+      ],
+      "crop": "disabled",
+      "images": [
+        "458",
+        0
+      ]
+    },
+    "class_type": "ImageScaleDown",
+    "_meta": {
+      "title": "Scale Down"
+    }
+  },
+  "453": {
+    "inputs": {
+      "keep_model_loaded": true,
+      "individual_objects": false,
+      "sam2_model": [
+        "455",
+        0
+      ],
+      "image": [
+        "429",
+        0
+      ],
+      "coordinates_positive": [
+        "439",
+        0
+      ]
+    },
+    "class_type": "Sam2Segmentation",
+    "_meta": {
+      "title": "Sam2Segmentation"
+    }
+  },
+  "454": {
+    "inputs": {
+      "text_input": "A shield-shaped football club logo with red Gothic \"VfB\" letters on a white upper half, the numbers \"18\" and \"93\" below the letters, and a yellow lower half with three black stag antlers stacked horizontally; red border outline the entire emblem",
+      "task": "caption_to_phrase_grounding",
+      "fill_mask": true,
+      "keep_model_loaded": false,
+      "max_new_tokens": 1024,
+      "num_beams": 3,
+      "do_sample": true,
+      "output_mask_select": "",
+      "seed": 861842281284586,
+      "image": [
+        "429",
+        0
+      ],
+      "florence2_model": [
+        "438",
+        0
+      ]
+    },
+    "class_type": "Florence2Run",
+    "_meta": {
+      "title": "Florence2Run"
+    }
+  },
+  "455": {
+    "inputs": {
+      "model": "sam2_hiera_base_plus.safetensors",
+      "segmentor": "single_image",
+      "device": "cuda",
+      "precision": "fp16"
+    },
+    "class_type": "DownloadAndLoadSAM2Model",
+    "_meta": {
+      "title": "(Down)Load SAM2Model"
+    }
+  },
+  "456": {
+    "inputs": {
+      "stitcher": [
+        "457",
+        0
+      ],
+      "inpainted_image": [
+        "452",
+        0
+      ]
+    },
+    "class_type": "InpaintStitchImproved",
+    "_meta": {
+      "title": "✂️ Inpaint Stitch (Improved)"
+    }
+  },
+  "457": {
+    "inputs": {
+      "downscale_algorithm": "bilinear",
+      "upscale_algorithm": "bicubic",
+      "preresize": false,
+      "preresize_mode": "ensure minimum resolution",
+      "preresize_min_width": 1024,
+      "preresize_min_height": 1024,
+      "preresize_max_width": 16384,
+      "preresize_max_height": 16384,
+      "mask_fill_holes": true,
+      "mask_expand_pixels": 0,
+      "mask_invert": false,
+      "mask_blend_pixels": 32,
+      "mask_hipass_filter": 0.1,
+      "extend_for_outpainting": false,
+      "extend_up_factor": 1,
+      "extend_down_factor": 1,
+      "extend_left_factor": 1,
+      "extend_right_factor": 1,
+      "context_from_mask_extend_factor": 1.2,
+      "output_resize_to_target_size": true,
+      "output_target_width": 512,
+      "output_target_height": 512,
+      "output_padding": "32",
+      "image": [
+        "429",
+        0
+      ],
+      "mask": [
+        "453",
+        0
+      ]
+    },
+    "class_type": "InpaintCropImproved",
+    "_meta": {
+      "title": "✂️ Inpaint Crop (Improved)"
+    }
+  },
+  "458": {
+    "inputs": {
+      "model": "RMBG-2.0",
+      "sensitivity": 1,
+      "process_res": 512,
+      "mask_blur": 7,
+      "mask_offset": 1,
+      "invert_output": false,
+      "refine_foreground": false,
+      "background": "Alpha",
+      "image": [
+        "443",
+        0
+      ]
+    },
+    "class_type": "RMBG",
+    "_meta": {
+      "title": "Remove Background (RMBG)"
+    }
+  },
+  "461": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "width": 1080,
+      "height": 1920,
+      "crop": "center",
+      "image": [
+        "456",
+        0
+      ]
+    },
+    "class_type": "ImageScale",
+    "_meta": {
+      "title": "Upscale Image"
+    }
+  }
+}
