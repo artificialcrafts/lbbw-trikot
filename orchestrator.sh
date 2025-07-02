@@ -15,7 +15,7 @@ for i in $(seq 1 $NUM_WORKERS)
 do
   # Use -d to run the container in "detached" (background) mode
   # Give each container a unique name for easy identification
-  docker run --gpus all -it --rm \
+  docker run --gpus all -it --rm -d \
   -e REPLICATE_API_TOKEN \
   lbbw-trikot-sqs:latest
 done
