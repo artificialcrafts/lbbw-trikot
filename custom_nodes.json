@@ -34,5 +34,9 @@
   {
     "repo": "https://github.com/1038lab/ComfyUI-RMBG",
     "commit": "9fb0be1"
+  },
+  {
+    "repo": "https://github.com/audioscavenger/save-image-extended-comfyui",
+    "commit": "a7a2dff"
   }
 ]

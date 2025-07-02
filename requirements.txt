@@ -24,6 +24,8 @@ safetensors>=0.4.2
 numpy>=1.25.0
 einops
 Pillow
+pillow-avif-plugin
+pillow-jxl-plugin
 scipy
 tqdm
 psutil

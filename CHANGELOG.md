@@ -1,4 +1,5 @@
 ## 2025-07-02
+- [Add save-image-extended-comfyui](https://github.com/audioscavenger/save-image-extended-comfyui) custom node
 - [Add ComfyUI-RMBG](https://github.com/1038lab/ComfyUI-RMBG) custom node
 - [Add comfyui-propost](https://github.com/digitaljohn/comfyui-propost) custom node
 
