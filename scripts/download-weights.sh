@@ -7,6 +7,7 @@ echo "--- Pre-warming model caches ---"
 mkdir -p /app/ComfyUI/models/BiRefNet
 mkdir -p /root/.cache/torch/hub/checkpoints/
 mkdir -p /app/ComfyUI/models/LLM
+mkdir -p /app/ComfyUI/models/RMBG/RMBG-2.0
 
 # Download SAM2 Hiera Base Plus Model
 echo "Downloading sam2_hiera_base_plus.safetensors..."
@@ -34,5 +35,10 @@ pget -xf "https://weights.replicate.delivery/default/comfy-ui/custom_nodes/comfy
 echo "Downloading Florence2-base model..."
 mkdir -p /app/ComfyUI/models/LLM/Florence-2-base
 pget -xf "https://weights.replicate.delivery/default/comfy-ui/LLM/Florence-2-base.tar" /app/ComfyUI/models/LLM/
+
+# Download RMBG-2.0 Model
+echo "Downloading RMBG-2.0 model..."
+mkdir -p /app/ComfyUI/models/RMBG/RMBG-2.0
+pget -xf "https://weights.replicate.delivery/default/comfy-ui/RMBG/RMBG-2.0/model.safetensors.tar" /app/ComfyUI/models/RMBG/RMBG-2.0/
 
 echo "--- Finished pre-warming caches ---"

@@ -22,3 +22,5 @@ done
 
 echo "All workers started. Use 'docker logs -f lbbw-worker-1' to view logs for a specific worker."
 echo "Use 'docker stop \$(docker ps -q --filter \"name=lbbw-worker-\")' to stop all workers."
+
+#docker stop $(docker ps -q)
