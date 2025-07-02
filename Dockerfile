@@ -1,12 +1,12 @@
-# Use the standard slim Python image, which is multi-architecture.
 FROM nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04
 
-# Set environment variables.
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 
 # Install system dependencies as root.
 RUN apt-get update && apt-get install -y \
+    python3-pip \
+    python3-venv \
     git \
     ffmpeg \
     build-essential \
@@ -14,6 +14,10 @@ RUN apt-get update && apt-get install -y \
     awscli \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
+
+# Set python/pip aliases (optional but helps for clean calls)
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && \
+    update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
 
 # Set the working directory.
 WORKDIR /app
@@ -28,21 +32,27 @@ RUN curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/l
 COPY requirements.txt .
 COPY scripts/download-weights.sh scripts/
 
-# 3. Install Python dependencies. This layer will be cached.
+# 3. Install CUDA-enabled torch/torchvision/torchaudio first!
+RUN pip install --upgrade pip
+RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# 4. Now install all other Python dependencies (ComfyUI, etc)
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 4. Run the weight download script. This creates a large, separate, cacheable layer.
-#    This layer will only be re-run if download-weights.sh changes.
+# 5. Run the weight download script. This creates a large, separate, cacheable layer.
 RUN chmod +x scripts/download-weights.sh && ./scripts/download-weights.sh
 
-# 5. Now copy the rest of your application code. Changes here won't trigger re-downloads.
+# 6. Now copy the rest of your application code. Changes here won't trigger re-downloads.
 COPY . .
 
-# 6. Pre-install all custom nodes..
+# 7. Pre-install all custom nodes.
 RUN python scripts/install_custom_nodes.py
 
-# 7. Make the entrypoint script executable
+# 8. Make the entrypoint script executable
 RUN chmod +x scripts/run.sh
 
-# 8. Define the entrypoint for the container.
+# 9. Install ComfyUI frontend pip requirements (if you want to always ensure frontend is up-to-date)
+RUN pip install --no-cache-dir -r /app/ComfyUI/requirements.txt
+
+# 10. Define the entrypoint for the container.
 ENTRYPOINT ["./scripts/run.sh"]
