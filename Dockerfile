@@ -38,6 +38,9 @@ RUN chmod +x scripts/download-weights.sh && ./scripts/download-weights.sh
 # 5. Now copy the rest of your application code. Changes here won't trigger re-downloads.
 COPY . .
 
+# 5b. Install ComfyUI frontend and required packages
+RUN pip install --no-cache-dir -r /app/ComfyUI/requirements.txt
+
 # 6. Pre-install all custom nodes..
 RUN python scripts/install_custom_nodes.py
 
