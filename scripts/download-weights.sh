@@ -8,6 +8,11 @@ echo "--- Pre-warming model caches ---"
 mkdir -p /app/ComfyUI/models/BiRefNet
 mkdir -p /root/.cache/torch/hub/checkpoints/
 
+# Download SAM2 Hiera Base Plus Model
+echo "Downloading sam2_hiera_base_plus.safetensors..."
+mkdir -p /app/ComfyUI/models/sam2
+pget -xf "https://weights.replicate.delivery/default/comfy-ui/sam2/sam2_hiera_base_plus.safetensors.tar" /app/ComfyUI/models/sam2/
+
 # Download SDXL-Flash Model
 echo "Downloading SDXL-Flash.safetensors..."
 pget -xf "https://weights.replicate.delivery/default/comfy-ui/checkpoints/SDXL-Flash.safetensors.tar" /app/ComfyUI/models/checkpoints/

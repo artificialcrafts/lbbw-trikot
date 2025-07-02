@@ -22,5 +22,9 @@
   {
     "repo": "https://github.com/sipherxyz/comfyui-art-venture",
     "commit": "2503bc2"
+  },
+  {
+    "repo": "https://github.com/kijai/ComfyUI-segment-anything-2",
+    "commit": "c59676b"
   }
 ]

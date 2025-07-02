@@ -1,3 +1,6 @@
+## 2025-07-02
+
+- [Add ComfyUI-segment-anything-2](https://github.com/kijai/ComfyUI-segment-anything-2) custom node
 ## 2025-07-01
 - [Add comfyui-art-venture](https://github.com/sipherxyz/comfyui-art-venture) custom node
 - [Add ComfyUI-Inpaint-CropAndStitch](https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch) custom node
