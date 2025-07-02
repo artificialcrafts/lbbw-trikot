@@ -94,6 +94,8 @@ qrcode[pil]
 colour-science
 transparent-background
 groundingdino-py
+onnxruntime 
+onnxruntime-gpu
 
 # --- Web and async tools ---
 aiohttp>=3.11.8

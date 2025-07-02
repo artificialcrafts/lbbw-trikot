@@ -4,9 +4,9 @@ set -e
 echo "--- Pre-warming model caches ---"
 
 # Create target directories
-# The -p flag ensures that parent directories are created if they don't exist.
 mkdir -p /app/ComfyUI/models/BiRefNet
 mkdir -p /root/.cache/torch/hub/checkpoints/
+mkdir -p /app/ComfyUI/models/LLM
 
 # Download SAM2 Hiera Base Plus Model
 echo "Downloading sam2_hiera_base_plus.safetensors..."
@@ -29,5 +29,10 @@ pget -xf "https://weights.replicate.delivery/default/comfy-ui/BiRefNet/pvt_v2_b5
 # Download ControlNet Aux Model
 echo "Downloading ControlNet Aux models..."
 pget -xf "https://weights.replicate.delivery/default/comfy-ui/custom_nodes/comfyui_controlnet_aux/mobilenet_v2-b0353104.pth.tar" /root/.cache/torch/hub/checkpoints/
+
+# Download Florence-2-base (LLM) Model
+echo "Downloading Florence2-base model..."
+mkdir -p /app/ComfyUI/models/LLM/Florence-2-base
+pget -xf "https://weights.replicate.delivery/default/comfy-ui/LLM/Florence-2-base.tar" /app/ComfyUI/models/LLM/
 
 echo "--- Finished pre-warming caches ---"
