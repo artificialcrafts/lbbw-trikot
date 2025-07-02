@@ -91,7 +91,7 @@ segment_anything
 fairscale
 pycocoevalcap
 qrcode[pil]
-# The two 'omegaconf' and 'pytorch-lightning' lines above are intentional due to multiple uses.
+colour-science
 
 # --- Web and async tools ---
 aiohttp>=3.11.8

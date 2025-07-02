@@ -1,4 +1,5 @@
 ## 2025-07-02
+- [Add comfyui-propost](https://github.com/digitaljohn/comfyui-propost) custom node
 
 - [Add ComfyUI-segment-anything-2](https://github.com/kijai/ComfyUI-segment-anything-2) custom node
 ## 2025-07-01

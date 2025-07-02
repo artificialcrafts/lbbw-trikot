@@ -26,5 +26,9 @@
   {
     "repo": "https://github.com/kijai/ComfyUI-segment-anything-2",
     "commit": "c59676b"
+  },
+  {
+    "repo": "https://github.com/digitaljohn/comfyui-propost",
+    "commit": "df6a6d1"
   }
 ]
