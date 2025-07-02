@@ -39,7 +39,7 @@ RUN chmod +x scripts/download-weights.sh && ./scripts/download-weights.sh
 COPY . .
 
 # 5b. Install ComfyUI frontend and required packages
-RUN pip install --no-cache-dir -r /app/ComfyUI/requirements.txt
+RUN pip install -r /app/ComfyUI/requirements.txt
 
 # 6. Pre-install all custom nodes..
 RUN python scripts/install_custom_nodes.py
