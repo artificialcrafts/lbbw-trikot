@@ -92,6 +92,8 @@ fairscale
 pycocoevalcap
 qrcode[pil]
 colour-science
+transparent-background
+groundingdino-py
 
 # --- Web and async tools ---
 aiohttp>=3.11.8
