@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NUM_WORKERS=5
+NUM_WORKERS=10
 IMAGE_NAME="lbbw-trikot-sqs:latest"
 
 # Check for the REPLICATE_API_TOKEN
