@@ -1,3 +1,6 @@
+## 2025-07-03
+
+- [Add ComfyUI-ReActor](https://github.com/Gourieff/ComfyUI-ReActor) custom node
 ## 2025-07-02
 - [Add save-image-extended-comfyui](https://github.com/audioscavenger/save-image-extended-comfyui) custom node
 - [Add ComfyUI-RMBG](https://github.com/1038lab/ComfyUI-RMBG) custom node

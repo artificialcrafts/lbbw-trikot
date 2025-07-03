@@ -8,7 +8,7 @@
       "max_faces_per_image": 50,
       "aspect_ratio": "2:3",
       "image": [
-        "430",
+        "488",
         0
       ]
     },
@@ -19,9 +19,9 @@
   },
   "428": {
     "inputs": {
-      "prompt": "",
+      "prompt": "medium close up of the woman is wearing a loose fitting grey tank top. Present the woman with natural, balanced body proportions, photographed with a standard portrait lens. The head should appear proportionate to the body, with no exaggeration or distortion. Revert any lens distortion. Keep the facial features, hair and expression of the person consistent. Change the background to a massive celebration of soccer fans from VfB Stuttgart within the crowd. The camera follows a large group of people walking down a narrow European city street. An immense shower of red and white rectangular confetti flutters down, filling the air. A large red and white flag is being waved in the distance, partially obscured by the crowd and confetti. Red and white rectangular confetti also blurry in the foreground. Keep everything consistent.\n",
       "aspect_ratio": "2:3",
-      "seed": 1065,
+      "seed": 1231,
       "output_format": "png",
       "safety_tolerance": 2,
       "force_rerun": false,
@@ -41,9 +41,9 @@
   },
   "429": {
     "inputs": {
-      "prompt": "",
+      "prompt": "Put the white soccer jersey on the woman and keep the original background consistent including facial features. The woman is standing in a massive shower of red and white rectangular confetti filling the air. Confetti is flying everywhere. Maintain all the small details of the soccer jersey including color and the logos and the embossed pattern on the white fabric of the jersey: The base color of the jersey is white, with a visually dynamic design featuring fine, textured, geometric embossments across the torso and lower front. These raised patterns add depth and tactile quality to the fabric, suggesting a high-performance polyester blend, commonly used in modern football kits for moisture-wicking and breathability. The material appears to be lightweight and stretchable, tailored for athletic performance.\n\nThe bottom left part of the jersey is clean white with the embossed pattern without other elements.\n\nThe most striking element is the red chest band, which runs horizontally across the front. This band is stylized with jagged, fragmented edges and arrow-like design elements, giving it a contemporary, disruptive look while maintaining the club’s traditional red band motif. This chest band contains the white sponsor logo \"LBBW\" (Landesbank Baden-Württemberg), rendered in bold, capital letters with a double-equals sign in the middle.\n\nClub Crest: Located on the left chest, the VfB Stuttgart crest features a shield design. The top part has red stylized antlers and the letters “VfB” in a gothic script, while the lower yellow portion includes three black deer antlers—a symbol of Württemberg. Above the crest is a single gold star, denoting the club’s historic Bundesliga titles.\n\nManufacturer Logo: On the right chest is the JAKO logo in red.\n\nAdditional Sponsor Logos: \n\nRight Sleeve: Displays the black two-line \"·he sol\" logo in lowercase Helvetica Bold font.\n\nShoulder Dot Detail:\nEach shoulder features a row of five red circles, the first one closest to the collar is the circular JAKO logomark, followed by four more red dots arranged in a row, each becoming progressively smaller.\n\nCollar and Cut:\nThe jersey has a modern V-neck collar with a slight cross-over construction at the sharp corner in the center, adding to the premium and sporty appearance.\n\nKeep face, hair and scenic photo background consistent.\nEnhance the facial details.\n",
       "aspect_ratio": "9:16",
-      "seed": 1726,
+      "seed": 1892,
       "output_format": "png",
       "safety_tolerance": 2,
       "force_rerun": true,
@@ -61,18 +61,9 @@
       "title": "FLUX KONTEXT: PUT SOCCER JERSEY ON THE HUMAN"
     }
   },
-  "430": {
-    "inputs": {
-      "image": "guy2.png"
-    },
-    "class_type": "LoadImage",
-    "_meta": {
-      "title": "USER"
-    }
-  },
   "431": {
     "inputs": {
-      "image": "2.png"
+      "image": "5.png"
     },
     "class_type": "LoadImage",
     "_meta": {
@@ -81,23 +72,11 @@
   },
   "432": {
     "inputs": {
-      "image": "Trikot_a.png"
+      "image": "VfB_LBBW_Trikot.png"
     },
     "class_type": "LoadImage",
     "_meta": {
       "title": "JERSEY"
-    }
-  },
-  "437": {
-    "inputs": {
-      "mask": [
-        "454",
-        1
-      ]
-    },
-    "class_type": "MaskPreview",
-    "_meta": {
-      "title": "MaskPreview"
     }
   },
   "438": {
@@ -141,44 +120,9 @@
       "title": "Scale Down"
     }
   },
-  "446": {
-    "inputs": {
-      "gray_scale": false,
-      "grain_type": "Fine",
-      "grain_sat": 0.5,
-      "grain_power": 0.7,
-      "shadows": 0.2,
-      "highs": 0.2,
-      "scale": 1,
-      "sharpen": 0,
-      "src_gamma": 1,
-      "seed": 118392502590327,
-      "image": [
-        "461",
-        0
-      ]
-    },
-    "class_type": "ProPostFilmGrain",
-    "_meta": {
-      "title": "ProPostFilmGrain"
-    }
-  },
-  "447": {
-    "inputs": {
-      "filename_prefix": "LBBW_VfB",
-      "images": [
-        "446",
-        0
-      ]
-    },
-    "class_type": "SaveImage",
-    "_meta": {
-      "title": "SAVE FINAL IMAGE"
-    }
-  },
   "449": {
     "inputs": {
-      "image": "Logo_4.png"
+      "image": "Logo_5.png"
     },
     "class_type": "LoadImage",
     "_meta": {
@@ -201,7 +145,7 @@
     "inputs": {
       "prompt": "Replace the soccer team logo emblem on the jersey with the highres version of image 2 on exact the same position, size and rotation. Keep the details like the 1893 year a White jersey background and match color from image 1. Do not show the star above the emblem, just the logo.",
       "aspect_ratio": "1:1",
-      "seed": 1903,
+      "seed": 2048,
       "output_format": "png",
       "safety_tolerance": 2,
       "force_rerun": true,
@@ -249,7 +193,7 @@
         0
       ],
       "image": [
-        "429",
+        "486",
         0
       ],
       "coordinates_positive": [
@@ -272,9 +216,9 @@
       "num_beams": 3,
       "do_sample": true,
       "output_mask_select": "",
-      "seed": 861842281284586,
+      "seed": 679615404534574,
       "image": [
-        "429",
+        "486",
         0
       ],
       "florence2_model": [
@@ -341,7 +285,7 @@
       "output_target_height": 512,
       "output_padding": "32",
       "image": [
-        "429",
+        "486",
         0
       ],
       "mask": [
@@ -374,20 +318,169 @@
       "title": "Remove Background (RMBG)"
     }
   },
-  "461": {
+  "485": {
     "inputs": {
-      "upscale_method": "nearest-exact",
+      "width": 1080,
+      "height": 1920,
+      "x_offset": 0,
+      "y_offset": -205,
+      "split": false,
+      "position": "bottom-center",
+      "image": [
+        "429",
+        0
+      ]
+    },
+    "class_type": "AILab_ImageCrop",
+    "_meta": {
+      "title": "Image Crop (RMBG) 🖼️"
+    }
+  },
+  "486": {
+    "inputs": {
+      "upscale_method": "lanczos",
       "width": 1080,
       "height": 1920,
       "crop": "center",
       "image": [
-        "456",
+        "485",
         0
       ]
     },
     "class_type": "ImageScale",
     "_meta": {
       "title": "Upscale Image"
+    }
+  },
+  "488": {
+    "inputs": {
+      "image": "2b1c5ba7-1a93-4e7e-a9a5-85143c4ca3f9.jpg"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "FACE"
+    }
+  },
+  "491": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "506",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "FINAL IMAGE"
+    }
+  },
+  "499": {
+    "inputs": {
+      "input_faces_order": "large-small",
+      "input_faces_index": "0",
+      "detect_gender_input": "no",
+      "source_faces_order": "large-small",
+      "source_faces_index": "0",
+      "detect_gender_source": "no",
+      "console_log_level": 1
+    },
+    "class_type": "ReActorOptions",
+    "_meta": {
+      "title": "ReActor 🌌 Options"
+    }
+  },
+  "504": {
+    "inputs": {
+      "bbox_model_name": "bbox/face_yolov8m.pt",
+      "bbox_threshold": 0.9100000000000001,
+      "bbox_dilation": 10,
+      "bbox_crop_factor": 3,
+      "bbox_drop_size": 10,
+      "sam_model_name": "sam_vit_l_0b3195.pth",
+      "sam_dilation": 0,
+      "sam_threshold": 0.93,
+      "bbox_expansion": 0,
+      "mask_hint_threshold": 0.7,
+      "mask_hint_use_negative": "False",
+      "morphology_operation": "dilate",
+      "morphology_distance": 0,
+      "blur_radius": 9,
+      "sigma_factor": 1,
+      "image": [
+        "456",
+        0
+      ],
+      "swapped_image": [
+        "505",
+        0
+      ]
+    },
+    "class_type": "ReActorMaskHelper",
+    "_meta": {
+      "title": "ReActor 🌌 Masking Helper"
+    }
+  },
+  "505": {
+    "inputs": {
+      "enabled": true,
+      "swap_model": "inswapper_128.onnx",
+      "facedetection": "retinaface_resnet50",
+      "face_restore_model": "GFPGANv1.4.pth",
+      "face_restore_visibility": 1,
+      "codeformer_weight": 0.5,
+      "input_image": [
+        "456",
+        0
+      ],
+      "source_image": [
+        "488",
+        0
+      ],
+      "options": [
+        "499",
+        0
+      ]
+    },
+    "class_type": "ReActorFaceSwapOpt",
+    "_meta": {
+      "title": "ReActor 🌌 Fast Face Swap [OPTIONS]"
+    }
+  },
+  "506": {
+    "inputs": {
+      "gray_scale": false,
+      "grain_type": "Coarse",
+      "grain_sat": 0.30000000000000004,
+      "grain_power": 0.15000000000000002,
+      "shadows": 1,
+      "highs": 0.2,
+      "scale": 1.5000000000000002,
+      "sharpen": 0,
+      "src_gamma": 1,
+      "seed": 670237695389841,
+      "image": [
+        "507",
+        0
+      ]
+    },
+    "class_type": "ProPostFilmGrain",
+    "_meta": {
+      "title": "ProPostFilmGrain"
+    }
+  },
+  "507": {
+    "inputs": {
+      "width": 1080,
+      "height": 1920,
+      "crop": "disabled",
+      "images": [
+        "504",
+        0
+      ]
+    },
+    "class_type": "ImageScaleDown",
+    "_meta": {
+      "title": "Scale Down"
     }
   }
 }

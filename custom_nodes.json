@@ -38,5 +38,9 @@
   {
     "repo": "https://github.com/audioscavenger/save-image-extended-comfyui",
     "commit": "a7a2dff"
+  },
+  {
+    "repo": "https://github.com/Gourieff/ComfyUI-ReActor",
+    "commit": "48a3ad2"
   }
 ]

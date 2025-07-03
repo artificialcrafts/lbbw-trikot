@@ -36,9 +36,15 @@ echo "Downloading Florence2-base model..."
 mkdir -p /app/ComfyUI/models/LLM/Florence-2-base
 pget -xf "https://weights.replicate.delivery/default/comfy-ui/LLM/Florence-2-base.tar" /app/ComfyUI/models/LLM/
 
-# Download RMBG-2.0 Model
+# Download ComfyUI Models and Files
 echo "Downloading RMBG-2.0 model..."
 mkdir -p /app/ComfyUI/models/RMBG/RMBG-2.0/
 aws s3 cp s3://lbbw-trikot/workflow-assets/model.safetensors /app/ComfyUI/models/RMBG/RMBG-2.0/model.safetensors
+
+mkdir -p /app/ComfyUI/models/ultralytics/bbox/
+aws s3 cp s3://lbbw-trikot/workflow-assets/face_yolov8m.pt /app/ComfyUI/models/ultralytics/bbox/face_yolov8m.pt
+
+mkdir -p /app/ComfyUI/models/sams/
+aws s3 cp s3://lbbw-trikot/workflow-assets/sam_vit_l_0b3195.pth /app/ComfyUI/models/sams/sam_vit_l_0b3195.pth
 
 echo "--- Finished pre-warming caches ---"
