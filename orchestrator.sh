@@ -2,7 +2,7 @@
 
 # --- Configuration ---
 RAM_PER_CONTAINER_GB=4      # RAM required by each worker container
-HOST_OVERHEAD_GB=4          # Reserve this much RAM for the host OS and other services
+HOST_OVERHEAD_GB=1          # Reserve this much RAM for the host OS and other services
                             # (e.g., 4GB is a reasonable default for many servers)
 IMAGE_NAME="lbbw-trikot-sqs:latest"
 CONTAINER_BASE_NAME="lbbw-worker" # Base name for containers
