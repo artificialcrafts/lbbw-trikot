@@ -1,9 +1,8 @@
 #!/bin/bash
 
 # --- Configuration ---
-RAM_PER_CONTAINER_GB=7,5      # RAM required by each worker container
-HOST_OVERHEAD_GB=1          # Reserve this much RAM for the host OS and other services
-                            # (e.g., 4GB is a reasonable default for many servers)
+RAM_PER_CONTAINER_GB=7.5      # RAM required by each worker container
+HOST_OVERHEAD_GB=1            # Reserve this much RAM for the host OS and other services
 IMAGE_NAME="lbbw-trikot-sqs:latest"
 CONTAINER_BASE_NAME="lbbw-worker" # Base name for containers
 
@@ -36,15 +35,15 @@ fi
 echo "Total system RAM detected: ${TOTAL_RAM_GB} GB"
 echo "Reserving ${HOST_OVERHEAD_GB} GB for host OS overhead."
 
-# Calculate usable RAM for containers
-USABLE_RAM_GB=$((TOTAL_RAM_GB - HOST_OVERHEAD_GB))
+# Calculate usable RAM for containers (floating point division)
+USABLE_RAM_GB=$(echo "$TOTAL_RAM_GB - $HOST_OVERHEAD_GB" | bc)
 
-# Determine the number of workers
-if [ "$USABLE_RAM_GB" -lt "$RAM_PER_CONTAINER_GB" ]; then
+# Determine the number of workers (floor division)
+if (( $(echo "$USABLE_RAM_GB < $RAM_PER_CONTAINER_GB" | bc -l) )); then
     echo "Warning: Not enough usable RAM (${USABLE_RAM_GB} GB) after reserving host overhead to start even one worker (needs ${RAM_PER_CONTAINER_GB} GB)."
     NUM_WORKERS=0
 else
-    NUM_WORKERS=$((USABLE_RAM_GB / RAM_PER_CONTAINER_GB))
+    NUM_WORKERS=$(echo "$USABLE_RAM_GB / $RAM_PER_CONTAINER_GB" | bc)
 fi
 
 if [ "$NUM_WORKERS" -eq 0 ]; then
@@ -70,12 +69,9 @@ echo "Starting $NUM_WORKERS worker containers in the background..."
 
 for i in $(seq 1 $NUM_WORKERS)
 do
-  # Construct unique container name
   CONTAINER_NAME="${CONTAINER_BASE_NAME}-$i"
   echo "Starting container: $CONTAINER_NAME..."
 
-  # Use -d to run the container in "detached" (background) mode
-  # --rm ensures the container is removed when it exits
   docker run --gpus all -it --rm -d \
     --memory="${RAM_PER_CONTAINER_GB}g" \
     --memory-swap="${RAM_PER_CONTAINER_GB}g" \
