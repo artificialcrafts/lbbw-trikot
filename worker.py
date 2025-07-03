@@ -117,7 +117,7 @@ def main():
         with open(warmup_job_path) as f:
             warmup_job = json.load(f)
         fake_message = {"MessageId": "warmup-1", "Body": json.dumps(warmup_job)}
-        process_message(fake_message, comfyUI, prepare_only=True)
+        process_message(fake_message, comfyUI, prepare_only=False)
         print("[Warmup] Done.\n")
 
     sqs = boto3.client('sqs', region_name=AWS_REGION)
