@@ -49,7 +49,7 @@ def upload_file_to_s3(local_path, s3_url):
         print(f"ERROR: S3 upload failed: {e}")
         raise
 
-def process_message(message, comfy_client, prepare_only=True):
+def process_message(message, comfy_client, prepare_only=False):
     """Processes a single job message from the SQS queue."""
     print(f"--- New Job Received (MessageID: {message.get('MessageId', 'NO-ID')}) ---")
     try:
