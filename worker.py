@@ -51,8 +51,7 @@ def upload_file_to_s3(local_path, s3_url):
 
 def process_message(message, comfy_client):
     """Processes a single job message from the SQS queue."""
-    print(f"--- New Job Received (MessageID: {message['MessageId']}) ---")
-    
+    print(f"--- New Job Received (MessageID: {message.get('MessageId', 'NO-ID')}) ---")
     try:
         job_data = json.loads(message['Body'])
         workflow_data = job_data['workflow']
@@ -96,9 +95,27 @@ def main():
 
     comfyUI = ComfyUI("127.0.0.1:8188")
     server_process = comfyUI.start_server(OUTPUT_DIR, INPUT_DIR)
-    
+
+    # --- WARM-UP JOB HANDLING ---
+    warmup_job_path = os.environ.get("WARMUP_JOB_PATH")
+    if len(sys.argv) > 1:
+        warmup_job_path = sys.argv[1]
+
+    if warmup_job_path and warmup_job_path.startswith("s3://"):
+        local_warmup_job_path = "/tmp/warmup_job.json"
+        print(f"[Warmup] Downloading S3 warmup job {warmup_job_path} to {local_warmup_job_path}")
+        subprocess.run(["aws", "s3", "cp", warmup_job_path, local_warmup_job_path], check=True)
+        warmup_job_path = local_warmup_job_path
+
+    if warmup_job_path and os.path.exists(warmup_job_path):
+        print(f"\n[Warmup] Processing warmup job at {warmup_job_path}")
+        with open(warmup_job_path) as f:
+            warmup_job = json.load(f)
+        fake_message = {"MessageId": "warmup-1", "Body": json.dumps(warmup_job)}
+        process_message(fake_message, comfyUI)
+        print("[Warmup] Done.\n")
+
     sqs = boto3.client('sqs', region_name=AWS_REGION)
-    
     print(f"Worker started successfully. Polling SQS queue: {QUEUE_URL}")
     
     while True:
