@@ -49,7 +49,7 @@ def upload_file_to_s3(local_path, s3_url):
         print(f"ERROR: S3 upload failed: {e}")
         raise
 
-def process_message(message, comfy_client):
+def process_message(message, comfy_client, prepare_only=True):
     """Processes a single job message from the SQS queue."""
     print(f"--- New Job Received (MessageID: {message.get('MessageId', 'NO-ID')}) ---")
     try:
@@ -69,9 +69,14 @@ def process_message(message, comfy_client):
                     if node.get("class_type") == "LoadImage" and node["inputs"].get("image") == local_filename:
                         print(f"Confirmed workflow node will use downloaded file: {local_filename}")
         
-        # --- Run Workflow ---
+        # --- Run Workflow or Prepare Only ---
         wf = comfy_client.load_workflow(workflow_data)
         comfy_client.connect()
+
+        if prepare_only:
+            print("[WARMUP] Preparation done, skipping actual workflow execution.")
+            return True  # or False, as you prefer
+
         comfy_client.run_workflow(wf)
         
         output_files = comfy_client.get_files([OUTPUT_DIR, "ComfyUI/temp"])
@@ -112,7 +117,7 @@ def main():
         with open(warmup_job_path) as f:
             warmup_job = json.load(f)
         fake_message = {"MessageId": "warmup-1", "Body": json.dumps(warmup_job)}
-        process_message(fake_message, comfyUI)
+        process_message(fake_message, comfyUI, prepare_only=True)
         print("[Warmup] Done.\n")
 
     sqs = boto3.client('sqs', region_name=AWS_REGION)
