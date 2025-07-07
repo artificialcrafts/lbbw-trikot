@@ -29,7 +29,7 @@ COPY requirements.txt .
 COPY scripts/download-weights.sh scripts/
 
 # 3. Install Python dependencies. This layer will be cached.
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 # 4. Run the weight download script. This creates a large, separate, cacheable layer.
 #    This layer will only be re-run if download-weights.sh changes.
