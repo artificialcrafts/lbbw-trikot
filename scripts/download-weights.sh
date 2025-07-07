@@ -13,6 +13,12 @@ pget -xf "https://weights.replicate.delivery/default/comfy-ui/sam2/sam2_hiera_ba
 mkdir -p /app/ComfyUI/models/loras
 aws s3 cp s3://lbbw-trikot/workflow-assets/crest.safetensors /app/ComfyUI/models/loras/crest.safetensors
 
+# Download flux1-canny-dev-fp8.safetensors
+echo "Downloading flux1-canny-dev-fp8.safetensors..."
+mkdir -p /app/ComfyUI/models/diffusion_models
+pget https://huggingface.co/Aitrepreneur/FLX/resolve/67c0f701f651fdd7fa0f6cd66a54393b7bde1d47/flux1-canny-dev-fp8.safetensors /app/ComfyUI/models/diffusion_models/clip_l.safetensors
+
+
 # Download clip_1.safetensors
 echo "Downloading clip_1.safetensors..."
 mkdir -p /app/ComfyUI/models/text_encoders
