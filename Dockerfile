@@ -33,7 +33,8 @@ RUN curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/l
 COPY requirements.txt .
 
 # 3. Install Python dependencies. This layer will be cached.
-RUN pip install --use-pep517 --no-cache-dir -r requirements.txt
+#RUN pip install --use-pep517 --no-cache-dir -r requirements.txt
+RUN pip install --use-feature=fast-deps --no-cache-dir -r requirements.txt
 
 # 4. Run the weight download script. This creates a large, separate, cacheable layer.
 #    This layer will only be re-run if download-weights.sh changes.
