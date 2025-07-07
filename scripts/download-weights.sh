@@ -22,7 +22,7 @@ pget https://huggingface.co/Aitrepreneur/FLX/resolve/67c0f701f651fdd7fa0f6cd66a5
 # Download all text_encoders
 echo "Downloading all text_encoders..."
 mkdir -p /app/ComfyUI/models/text_encoders
-aws s3 cp s3://lbbw-trikot/workflow-assets/text_encoders/ /app/ComfyUI/models/loras/crest.safetensors --recursive
+aws s3 cp s3://lbbw-trikot/workflow-assets/text_encoders/ /app/ComfyUI/models/text_encoders --recursive
 
 # Download BiRefNet Models
 echo "Downloading BiRefNet models..."
