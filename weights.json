@@ -353,8 +353,7 @@
     "wan2.1-1.3b-control-lora-depth-v0.1_comfy.safetensors",
     "wan2.1-1.3b-control-lora-tile-v1.0_comfy.safetensors",
     "weight_slider-LECO-v1.safetensors",
-    "crest.safetensors",
-    "flux1-canny-dev-fp8.safetensors"
+    "crest.safetensors"
   ],
   "EMBEDDINGS": [
     "bad_prompt_version2-neg.pt",
@@ -599,6 +598,7 @@
     "flux1-fill-dev.safetensors",
     "flux1-Fill-Dev_FP8.safetensors",
     "flux1-schnell-fp8-e4m3fn.safetensors",
+    "flux1-canny-dev-fp8.safetensors",
     "hidream_i1_dev_bf16.safetensors",
     "hidream_i1_dev_fp8.safetensors",
     "hidream_i1_fast_bf16.safetensors",
