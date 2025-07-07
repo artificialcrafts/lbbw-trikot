@@ -26,13 +26,13 @@ RUN curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/l
 
 # 2. Copy ONLY the requirements file and the new download script.
 COPY requirements.txt .
-COPY scripts/download-weights.sh scripts/
 
 # 3. Install Python dependencies. This layer will be cached.
 RUN pip install -r requirements.txt
 
 # 4. Run the weight download script. This creates a large, separate, cacheable layer.
 #    This layer will only be re-run if download-weights.sh changes.
+COPY scripts/download-weights.sh scripts/
 RUN chmod +x scripts/download-weights.sh && ./scripts/download-weights.sh
 
 # 5. Now copy the rest of your application code. Changes here won't trigger re-downloads.
