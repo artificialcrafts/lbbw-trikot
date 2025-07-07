@@ -75,7 +75,7 @@ fqdn==1.5.1
 frozenlist==1.7.0
 fsspec==2025.5.1
 future==1.0.0
-gpg==1.23.2
+gpg
 graphviz==0.21
 greenlet==3.2.3
 h11==0.16.0
