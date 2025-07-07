@@ -11,22 +11,22 @@ pget -xf "https://weights.replicate.delivery/default/comfy-ui/sam2/sam2_hiera_ba
 # Download crest.safetensors
 # echo "Downloading crest.safetensors..."
 mkdir -p /app/ComfyUI/models/loras
-aws s3 cp s3://lbbw-trikot/workflow-assets/crest.safetensors /app/CComfyUI/models/loras
+aws s3 cp s3://lbbw-trikot/workflow-assets/crest.safetensors /app/CComfyUI/models/loras/crest.safetensors
 
 # Download clip_1.safetensors
 echo "Downloading clip_1.safetensors..."
 mkdir -p /app/ComfyUI/models/text_encoders
-pget https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors /app/ComfyUI/models/text_encoders
+pget https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors /app/ComfyUI/models/text_encoders/clip_l.safetensors
 
 # Download vae.safetensors
 echo "Downloading vae.safetensors..."
 mkdir -p /app/ComfyUI/models/vae
-pget https://huggingface.co/lovis93/testllm/resolve/ed9cf1af7465cebca4649157f118e331cf2a084f/ae.safetensors /app/ComfyUI/models/text_encoders
+pget https://huggingface.co/lovis93/testllm/resolve/ed9cf1af7465cebca4649157f118e331cf2a084f/ae.safetensors /app/ComfyUI/models/text_encoders/ae.safetensors
 
 # Download inswapper_128.safetensors
 echo "Downloading inswapper_128.safetensors..."
 mkdir -p /app/ComfyUI/models/insightface
-pget https://huggingface.co/ezioruan/inswapper_128.onnx/resolve/main/inswapper_128.onnx /app/ComfyUI/models/text_encoders
+pget https://huggingface.co/ezioruan/inswapper_128.onnx/resolve/main/inswapper_128.onnx /app/ComfyUI/models/text_encoders/inswapper_128.onnx
 
 
 # Download BiRefNet Models
