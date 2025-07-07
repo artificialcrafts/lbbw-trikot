@@ -7,6 +7,7 @@ ENV PYTHONUNBUFFERED=1
 
 # Install system dependencies as root.
 RUN apt-get update && apt-get install -y \
+    curl \
     git \
     ffmpeg \
     build-essential \
