@@ -23,6 +23,7 @@ safetensors>=0.4.2
 # --- General ML/AI libraries ---
 numpy>=1.25.0
 einops
+mss
 Pillow
 pillow-avif-plugin
 pillow-jxl-plugin

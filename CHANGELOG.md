@@ -1,3 +1,7 @@
+## 2025-07-07
+- [Add ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes) custom node
+
+- [Add ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes) custom node
 ## 2025-07-03
 
 - [Add ComfyUI-ReActor](https://github.com/Gourieff/ComfyUI-ReActor) custom node

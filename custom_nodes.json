@@ -12,10 +12,6 @@
     "commit": "de485b6"
   },
   {
-    "repo": "https://github.com/storyicon/comfyui_segment_anything",
-    "commit": "ab63955"
-  },
-  {
     "repo": "https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch",
     "commit": "b432b24"
   },
@@ -36,11 +32,11 @@
     "commit": "9fb0be1"
   },
   {
-    "repo": "https://github.com/audioscavenger/save-image-extended-comfyui",
-    "commit": "a7a2dff"
-  },
-  {
     "repo": "https://github.com/Gourieff/ComfyUI-ReActor",
     "commit": "48a3ad2"
+  },
+  {
+    "repo": "https://github.com/kijai/ComfyUI-KJNodes",
+    "commit": "5c19bd8"
   }
 ]
