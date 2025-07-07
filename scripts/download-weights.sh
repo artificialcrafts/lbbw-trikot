@@ -11,7 +11,7 @@ pget -xf "https://weights.replicate.delivery/default/comfy-ui/sam2/sam2_hiera_ba
 # Download crest.safetensors
 # echo "Downloading crest.safetensors..."
 mkdir -p /app/ComfyUI/models/loras
-aws s3 cp s3://lbbw-trikot/workflow-assets/crest.safetensors /app/CComfyUI/models/loras/crest.safetensors
+aws s3 cp s3://lbbw-trikot/workflow-assets/crest.safetensors /app/ComfyUI/models/loras/crest.safetensors
 
 # Download clip_1.safetensors
 echo "Downloading clip_1.safetensors..."
