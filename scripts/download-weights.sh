@@ -18,6 +18,9 @@ echo "Downloading flux1-canny-dev-fp8.safetensors..."
 mkdir -p /app/ComfyUI/models/diffusion_models
 pget https://huggingface.co/Aitrepreneur/FLX/resolve/67c0f701f651fdd7fa0f6cd66a54393b7bde1d47/flux1-canny-dev-fp8.safetensors /app/ComfyUI/models/diffusion_models/flux1-canny-dev-fp8.safetensors
 
+# Download Florence-2-large
+mkdir -p /app/ComfyUI/models/LLM/Florence-2-large
+aws s3 cp s3://lbbw-trikot/workflow-assets/Florence-2-large/ /app/ComfyUI/models/LLM/Florence-2-large --recursive
 
 # Download all text_encoders
 echo "Downloading all text_encoders..."
