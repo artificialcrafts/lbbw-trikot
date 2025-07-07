@@ -37,7 +37,7 @@ RUN pip install --use-pep517 --no-cache-dir -r requirements.txt
 
 # 4. Run the weight download script. This creates a large, separate, cacheable layer.
 #    This layer will only be re-run if download-weights.sh changes.
-
+COPY scripts/download-weights.sh scripts/
 RUN chmod +x scripts/download-weights.sh && ./scripts/download-weights.sh
 
 # 5. Now copy the rest of your application code. Changes here won't trigger re-downloads.
