@@ -1,0 +1,715 @@
+{
+    "inputs": {
+        "4c089a5c-1034-428a-a2ba-3cac1156bb87.jpg": "s3://lbbw-trikot/input-assets/4c089a5c-1034-428a-a2ba-3cac1156bb87.jpg",
+        "Location_Stadion01.jpg": "s3://lbbw-trikot/input-assets/locations/Location_Stadion01.jpg",
+        "VfB_LBBW_Trikot.png": "s3://lbbw-trikot/input-assets/Shirt_Mann.png"
+    },
+    "job_id": "9cd55619-8ae2-49ee-b479-c39937539c05",
+    "workflow": {
+        "415": {
+            "inputs": {
+                "number_of_faces": 1,
+                "scale_factor": 5.5,
+                "shift_factor": 0.5000000000000001,
+                "start_index": 0,
+                "max_faces_per_image": 50,
+                "aspect_ratio": "2:3",
+                "image": [
+                    "582",
+                    0
+                ]
+            },
+            "class_type": "AutoCropFaces",
+            "_meta": {
+                "title": "Auto Crop Faces"
+            }
+        },
+        "428": {
+            "inputs": {
+                "prompt": "Put the man into the soccer stadium and keep the background consistent. The man is topless. Keep facial features, hair, and proportions consistent. Present the person with natural, balanced body proportions, photographed with a standard portrait lens from a comfortable distance. The head should appear proportionate to the body, with no exaggeration or distortion. Revert any lens distortion.",
+                "aspect_ratio": "2:3",
+                "seed": 1638,
+                "output_format": "png",
+                "safety_tolerance": 2,
+                "force_rerun": false,
+                "input_image_1": [
+                    "415",
+                    0
+                ],
+                "input_image_2": [
+                    "431",
+                    0
+                ]
+            },
+            "class_type": "Replicate flux-kontext-apps/multi-image-kontext-pro",
+            "_meta": {
+                "title": "FLUX KONTEXT: PUT HUMAN IN SCENE AND GREY SHIRT"
+            }
+        },
+        "429": {
+            "inputs": {
+                "prompt": "Put the white soccer jersey on the man. Keep the facial features, hair, and expression of the man in image 1 consistent. Maintain all the small details of the soccer jersey, including the color, the five dots on each shoulder, the logos, and the embossed pattern on the white fabric of the jersey: The base color of the jersey is white, with a visually dynamic design featuring fine, textured, geometric embossments across the torso and lower front. These raised patterns add depth and tactile quality to the fabric, suggesting a high-performance polyester blend, commonly used in modern football kits for moisture-wicking and breathability. The material appears to be lightweight and stretchable, tailored for athletic performance. The most striking element is the red chest band, which runs horizontally across the front. This band is stylized with jagged, fragmented edges and arrow-like design elements, giving it a contemporary, disruptive look while maintaining the club\u2019s traditional red band motif. This chest band contains the white sponsor logo 'LBBW' (Landesbank Baden-W\u00fcrttemberg), rendered in bold, capital letters with a double-equals sign in the middle. The jersey has a modern V-neck collar with a slight cross-over construction at the sharp corner in the center, adding to the premium and sporty appearance. On the right chest is the JAKO logo in red. The right sleeve displays the black two-line '\u0387he sol' logo in lowercase Helvetica Bold font. Each shoulder features a row of five pastel red circles; the first one closest to the collar is the circular JAKO logomark, followed by four more red dots arranged in a row, each becoming progressively smaller. Keep face, hair, and scenic photo background consistent, and enhance the facial details.",
+                "aspect_ratio": "9:16",
+                "seed": 2048,
+                "output_format": "png",
+                "safety_tolerance": 2,
+                "force_rerun": false,
+                "input_image_1": [
+                    "428",
+                    0
+                ],
+                "input_image_2": [
+                    "432",
+                    0
+                ]
+            },
+            "class_type": "Replicate flux-kontext-apps/multi-image-kontext-pro",
+            "_meta": {
+                "title": "FLUX KONTEXT: PUT SOCCER JERSEY ON THE HUMAN"
+            }
+        },
+        "431": {
+            "inputs": {
+                "image": "Location_Stadion01.jpg"
+            },
+            "class_type": "LoadImage",
+            "_meta": {
+                "title": "SCENE"
+            }
+        },
+        "432": {
+            "inputs": {
+                "image": "VfB_LBBW_Trikot.png"
+            },
+            "class_type": "LoadImage",
+            "_meta": {
+                "title": "JERSEY"
+            }
+        },
+        "438": {
+            "inputs": {
+                "model": "microsoft/Florence-2-large",
+                "precision": "fp16",
+                "attention": "sdpa",
+                "convert_to_safetensors": false
+            },
+            "class_type": "DownloadAndLoadFlorence2Model",
+            "_meta": {
+                "title": "DownloadAndLoadFlorence2Model"
+            }
+        },
+        "439": {
+            "inputs": {
+                "index": "0",
+                "batch": false,
+                "data": [
+                    "454",
+                    3
+                ]
+            },
+            "class_type": "Florence2toCoordinates",
+            "_meta": {
+                "title": "Florence2 Coordinates"
+            }
+        },
+        "443": {
+            "inputs": {
+                "width": 512,
+                "height": 512,
+                "crop": "disabled",
+                "images": [
+                    "537",
+                    0
+                ]
+            },
+            "class_type": "ImageScaleDown",
+            "_meta": {
+                "title": "Scale Down"
+            }
+        },
+        "450": {
+            "inputs": {
+                "image": [
+                    "457",
+                    1
+                ]
+            },
+            "class_type": "GetImageSize",
+            "_meta": {
+                "title": "Get Image Size"
+            }
+        },
+        "452": {
+            "inputs": {
+                "width": [
+                    "450",
+                    0
+                ],
+                "height": [
+                    "450",
+                    1
+                ],
+                "crop": "disabled",
+                "images": [
+                    "458",
+                    0
+                ]
+            },
+            "class_type": "ImageScaleDown",
+            "_meta": {
+                "title": "Scale Down"
+            }
+        },
+        "453": {
+            "inputs": {
+                "keep_model_loaded": true,
+                "individual_objects": false,
+                "sam2_model": [
+                    "455",
+                    0
+                ],
+                "image": [
+                    "486",
+                    0
+                ],
+                "coordinates_positive": [
+                    "439",
+                    0
+                ]
+            },
+            "class_type": "Sam2Segmentation",
+            "_meta": {
+                "title": "Sam2Segmentation"
+            }
+        },
+        "454": {
+            "inputs": {
+                "text_input": "golden star and shield crest",
+                "task": "caption_to_phrase_grounding",
+                "fill_mask": true,
+                "keep_model_loaded": true,
+                "max_new_tokens": 1024,
+                "num_beams": 3,
+                "do_sample": true,
+                "output_mask_select": "",
+                "seed": 295985036425943,
+                "image": [
+                    "486",
+                    0
+                ],
+                "florence2_model": [
+                    "438",
+                    0
+                ]
+            },
+            "class_type": "Florence2Run",
+            "_meta": {
+                "title": "Florence2Run"
+            }
+        },
+        "455": {
+            "inputs": {
+                "model": "sam2_hiera_base_plus.safetensors",
+                "segmentor": "single_image",
+                "device": "cuda",
+                "precision": "fp16"
+            },
+            "class_type": "DownloadAndLoadSAM2Model",
+            "_meta": {
+                "title": "(Down)Load SAM2Model"
+            }
+        },
+        "456": {
+            "inputs": {
+                "stitcher": [
+                    "457",
+                    0
+                ],
+                "inpainted_image": [
+                    "452",
+                    0
+                ]
+            },
+            "class_type": "InpaintStitchImproved",
+            "_meta": {
+                "title": "\u2702\ufe0f Inpaint Stitch (Improved)"
+            }
+        },
+        "457": {
+            "inputs": {
+                "downscale_algorithm": "bilinear",
+                "upscale_algorithm": "bicubic",
+                "preresize": false,
+                "preresize_mode": "ensure minimum resolution",
+                "preresize_min_width": 1024,
+                "preresize_min_height": 1024,
+                "preresize_max_width": 16384,
+                "preresize_max_height": 16384,
+                "mask_fill_holes": true,
+                "mask_expand_pixels": 3,
+                "mask_invert": false,
+                "mask_blend_pixels": 8,
+                "mask_hipass_filter": 0.1,
+                "extend_for_outpainting": false,
+                "extend_up_factor": 1.1600000000000001,
+                "extend_down_factor": 1,
+                "extend_left_factor": 1,
+                "extend_right_factor": 1,
+                "context_from_mask_extend_factor": 1.0000000000000002,
+                "output_resize_to_target_size": true,
+                "output_target_width": 512,
+                "output_target_height": 512,
+                "output_padding": "0",
+                "image": [
+                    "486",
+                    0
+                ],
+                "mask": [
+                    "453",
+                    0
+                ]
+            },
+            "class_type": "InpaintCropImproved",
+            "_meta": {
+                "title": "\u2702\ufe0f Inpaint Crop (Improved)"
+            }
+        },
+        "458": {
+            "inputs": {
+                "model": "RMBG-2.0",
+                "sensitivity": 1,
+                "process_res": 512,
+                "mask_blur": 7,
+                "mask_offset": 1,
+                "invert_output": false,
+                "refine_foreground": false,
+                "background": "Alpha",
+                "image": [
+                    "443",
+                    0
+                ]
+            },
+            "class_type": "RMBG",
+            "_meta": {
+                "title": "Remove Background (RMBG)"
+            }
+        },
+        "485": {
+            "inputs": {
+                "width": 1080,
+                "height": 1920,
+                "x_offset": 0,
+                "y_offset": -205,
+                "split": false,
+                "position": "bottom-center",
+                "image": [
+                    "429",
+                    0
+                ]
+            },
+            "class_type": "AILab_ImageCrop",
+            "_meta": {
+                "title": "Image Crop (RMBG) \ud83d\uddbc\ufe0f"
+            }
+        },
+        "486": {
+            "inputs": {
+                "upscale_method": "lanczos",
+                "width": 1080,
+                "height": 1920,
+                "crop": "center",
+                "image": [
+                    "485",
+                    0
+                ]
+            },
+            "class_type": "ImageScale",
+            "_meta": {
+                "title": "Upscale Image"
+            }
+        },
+        "499": {
+            "inputs": {
+                "input_faces_order": "large-small",
+                "input_faces_index": "0",
+                "detect_gender_input": "no",
+                "source_faces_order": "large-small",
+                "source_faces_index": "0",
+                "detect_gender_source": "no",
+                "console_log_level": 1
+            },
+            "class_type": "ReActorOptions",
+            "_meta": {
+                "title": "ReActor \ud83c\udf0c Options"
+            }
+        },
+        "504": {
+            "inputs": {
+                "bbox_model_name": "bbox/face_yolov8m.pt",
+                "bbox_threshold": 0.8900000000000001,
+                "bbox_dilation": 10,
+                "bbox_crop_factor": 3,
+                "bbox_drop_size": 10,
+                "sam_model_name": "sam_vit_l_0b3195.pth",
+                "sam_dilation": 0,
+                "sam_threshold": 0.93,
+                "bbox_expansion": 0,
+                "mask_hint_threshold": 0.7,
+                "mask_hint_use_negative": "False",
+                "morphology_operation": "dilate",
+                "morphology_distance": 0,
+                "blur_radius": 9,
+                "sigma_factor": 1,
+                "image": [
+                    "456",
+                    0
+                ],
+                "swapped_image": [
+                    "505",
+                    0
+                ]
+            },
+            "class_type": "ReActorMaskHelper",
+            "_meta": {
+                "title": "ReActor \ud83c\udf0c Masking Helper"
+            }
+        },
+        "505": {
+            "inputs": {
+                "enabled": true,
+                "swap_model": "inswapper_128.onnx",
+                "facedetection": "retinaface_resnet50",
+                "face_restore_model": "GFPGANv1.4.pth",
+                "face_restore_visibility": 1,
+                "codeformer_weight": 0.5,
+                "input_image": [
+                    "456",
+                    0
+                ],
+                "source_image": [
+                    "582",
+                    0
+                ],
+                "options": [
+                    "499",
+                    0
+                ]
+            },
+            "class_type": "ReActorFaceSwapOpt",
+            "_meta": {
+                "title": "ReActor \ud83c\udf0c Fast Face Swap [OPTIONS]"
+            }
+        },
+        "506": {
+            "inputs": {
+                "gray_scale": false,
+                "grain_type": "Coarse",
+                "grain_sat": 0.30000000000000004,
+                "grain_power": 0.15000000000000002,
+                "shadows": 1,
+                "highs": 0.2,
+                "scale": 1.5000000000000002,
+                "sharpen": 0,
+                "src_gamma": 1,
+                "seed": 1105222445176292,
+                "image": [
+                    "507",
+                    0
+                ]
+            },
+            "class_type": "ProPostFilmGrain",
+            "_meta": {
+                "title": "ProPostFilmGrain"
+            }
+        },
+        "507": {
+            "inputs": {
+                "width": 1080,
+                "height": 1920,
+                "crop": "disabled",
+                "images": [
+                    "504",
+                    0
+                ]
+            },
+            "class_type": "ImageScaleDown",
+            "_meta": {
+                "title": "Scale Down"
+            }
+        },
+        "508": {
+            "inputs": {
+                "direction": "right",
+                "match_image_size": true,
+                "spacing_width": 0,
+                "spacing_color": "white",
+                "image1": [
+                    "457",
+                    1
+                ],
+                "image2": [
+                    "537",
+                    0
+                ]
+            },
+            "class_type": "ImageStitch",
+            "_meta": {
+                "title": "Image Stitch"
+            }
+        },
+        "509": {
+            "inputs": {
+                "direction": "right",
+                "match_image_size": true,
+                "spacing_width": 0,
+                "spacing_color": "white",
+                "image1": [
+                    "508",
+                    0
+                ],
+                "image2": [
+                    "582",
+                    0
+                ]
+            },
+            "class_type": "ImageStitch",
+            "_meta": {
+                "title": "Image Stitch"
+            }
+        },
+        "510": {
+            "inputs": {
+                "direction": "down",
+                "match_image_size": true,
+                "spacing_width": 0,
+                "spacing_color": "white",
+                "image1": [
+                    "509",
+                    0
+                ],
+                "image2": [
+                    "506",
+                    0
+                ]
+            },
+            "class_type": "ImageStitch",
+            "_meta": {
+                "title": "Image Stitch"
+            }
+        },
+        "511": {
+            "inputs": {
+                "filename_prefix": "Vergleich_Test_Runde_1_",
+                "images": [
+                    "510",
+                    0
+                ]
+            },
+            "class_type": "SaveImage",
+            "_meta": {
+                "title": "Save Image"
+            }
+        },
+        "514": {
+            "inputs": {
+                "text": "",
+                "clip": [
+                    "528",
+                    0
+                ]
+            },
+            "class_type": "CLIPTextEncode",
+            "_meta": {
+                "title": "CLIP Text Encode (Negative Prompt)"
+            }
+        },
+        "516": {
+            "inputs": {
+                "seed": 1014018525072965,
+                "steps": 20,
+                "cfg": 1,
+                "sampler_name": "euler",
+                "scheduler": "normal",
+                "denoise": 1,
+                "model": [
+                    "529",
+                    0
+                ],
+                "positive": [
+                    "517",
+                    0
+                ],
+                "negative": [
+                    "517",
+                    1
+                ],
+                "latent_image": [
+                    "517",
+                    2
+                ]
+            },
+            "class_type": "KSampler",
+            "_meta": {
+                "title": "KSampler"
+            }
+        },
+        "517": {
+            "inputs": {
+                "positive": [
+                    "520",
+                    0
+                ],
+                "negative": [
+                    "514",
+                    0
+                ],
+                "vae": [
+                    "519",
+                    0
+                ],
+                "pixels": [
+                    "521",
+                    0
+                ]
+            },
+            "class_type": "InstructPixToPixConditioning",
+            "_meta": {
+                "title": "InstructPixToPixConditioning"
+            }
+        },
+        "519": {
+            "inputs": {
+                "vae_name": "ae.safetensors"
+            },
+            "class_type": "VAELoader",
+            "_meta": {
+                "title": "Load VAE"
+            }
+        },
+        "520": {
+            "inputs": {
+                "guidance": 30,
+                "conditioning": [
+                    "526",
+                    0
+                ]
+            },
+            "class_type": "FluxGuidance",
+            "_meta": {
+                "title": "FluxGuidance"
+            }
+        },
+        "521": {
+            "inputs": {
+                "low_threshold": 0.15000000000000002,
+                "high_threshold": 0.30000000000000004,
+                "image": [
+                    "457",
+                    1
+                ]
+            },
+            "class_type": "Canny",
+            "_meta": {
+                "title": "Canny"
+            }
+        },
+        "523": {
+            "inputs": {
+                "samples": [
+                    "516",
+                    0
+                ],
+                "vae": [
+                    "519",
+                    0
+                ]
+            },
+            "class_type": "VAEDecode",
+            "_meta": {
+                "title": "VAE Decode"
+            }
+        },
+        "526": {
+            "inputs": {
+                "text": "vfbcrest, red frame, with red \"VfB\" letters in gothic font on white, the numbers \"18\" and 93\" in red below and a yellow triangle shape with black frame and three black antlers, golden embossed star above, on white fabric",
+                "clip": [
+                    "529",
+                    1
+                ]
+            },
+            "class_type": "CLIPTextEncode",
+            "_meta": {
+                "title": "CLIP Text Encode (Positive Prompt)"
+            }
+        },
+        "528": {
+            "inputs": {
+                "clip_name1": "clip_l.safetensors",
+                "clip_name2": "t5xxl_fp8_e4m3fn_scaled.safetensors",
+                "type": "flux",
+                "device": "default"
+            },
+            "class_type": "DualCLIPLoader",
+            "_meta": {
+                "title": "DualCLIPLoader"
+            }
+        },
+        "529": {
+            "inputs": {
+                "lora_name": "crest.safetensors",
+                "strength_model": 1.5400000000000003,
+                "strength_clip": 1,
+                "model": [
+                    "531",
+                    0
+                ],
+                "clip": [
+                    "528",
+                    0
+                ]
+            },
+            "class_type": "LoraLoader",
+            "_meta": {
+                "title": "Load LoRA"
+            }
+        },
+        "531": {
+            "inputs": {
+                "unet_name": "flux1-canny-dev-fp8.safetensors",
+                "weight_dtype": "fp8_e4m3fn_fast"
+            },
+            "class_type": "UNETLoader",
+            "_meta": {
+                "title": "Load Diffusion Model"
+            }
+        },
+        "537": {
+            "inputs": {
+                "method": "mkl",
+                "strength": 1,
+                "image_ref": [
+                    "457",
+                    1
+                ],
+                "image_target": [
+                    "523",
+                    0
+                ]
+            },
+            "class_type": "ColorMatch",
+            "_meta": {
+                "title": "Color Match"
+            }
+        },
+        "582": {
+            "inputs": {
+                "image": "4c089a5c-1034-428a-a2ba-3cac1156bb87.jpg"
+            },
+            "class_type": "LoadImage",
+            "_meta": {
+                "title": "FACE"
+            }
+        }
+    },
+    "s3_url": "s3://lbbw-trikot/output/2025-07-07/9cd55619-8ae2-49ee-b479-c39937539c05.png"
+}

@@ -2,5 +2,5 @@
 UUID=$(uuidgen)
 docker run --gpus all -it --rm \
   -e REPLICATE_API_TOKEN \
-  -e WARMUP_JOB_PATH=s3://lbbw-trikot/workflow-assets/d5dfdea5-b466-495d-86dc-3767b7b29c3e.json \
+  -e WARMUP_JOB_PATH=s3://lbbw-trikot/workflow-assets/a7c5a9c8-858b-4cc6-9bc7-b97137307366.json \
   lbbw-trikot-sqs:latest
