@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # --- Configuration ---
-RAM_PER_CONTAINER_GB=7.5      # RAM required by each worker container
-HOST_OVERHEAD_GB=0            # Reserve this much RAM for the host OS and other services
+RAM_PER_CONTAINER_GB=25      # RAM required by each worker container
+HOST_OVERHEAD_GB=2            # Reserve this much RAM for the host OS and other services
 IMAGE_NAME="lbbw-trikot-sqs:latest"
 CONTAINER_BASE_NAME="lbbw-worker" # Base name for containers
 
