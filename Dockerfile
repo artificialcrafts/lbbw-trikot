@@ -10,10 +10,25 @@ RUN apt-get update && apt-get install -y \
     git \
     ffmpeg \
     build-essential \
-    curl \
-    awscli \
+    python3-dev \
+    python3-pip \
+    python3-setuptools \
+    python3-wheel \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgl1-mesa-glx \
+    libjpeg-dev \
+    zlib1g-dev \
+    libpython3-dev \
+    pkg-config \
+    && apt-get clean \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
+
+# Update pip
+RUN pip install --upgrade pip setuptools wheel
 
 # Set the working directory.
 WORKDIR /app
@@ -28,7 +43,7 @@ RUN curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/l
 COPY requirements.txt .
 
 # 3. Install Python dependencies. This layer will be cached.
-RUN pip install -r requirements.txt
+RUN pip install --use-pep517 --no-cache-dir -r requirements.txt
 
 # 4. Run the weight download script. This creates a large, separate, cacheable layer.
 #    This layer will only be re-run if download-weights.sh changes.
