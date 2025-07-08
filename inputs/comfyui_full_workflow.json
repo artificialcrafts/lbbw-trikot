@@ -21,7 +21,7 @@
     "inputs": {
       "prompt": "medium close up of the woman is wearing a loose fitting grey tank top. Present the woman with natural, balanced body proportions, photographed with a standard portrait lens. The head should appear proportionate to the body, with no exaggeration or distortion. Revert any lens distortion. Keep the facial features, hair and expression of the person consistent. Change the background to a massive celebration of soccer fans from VfB Stuttgart within the crowd. The camera follows a large group of people walking down a narrow European city street. An immense shower of red and white rectangular confetti flutters down, filling the air. A large red and white flag is being waved in the distance, partially obscured by the crowd and confetti. Red and white rectangular confetti also blurry in the foreground. Keep everything consistent.\n",
       "aspect_ratio": "2:3",
-      "seed": 1638,
+      "seed": 650,
       "output_format": "png",
       "safety_tolerance": 2,
       "force_rerun": false,
@@ -43,7 +43,7 @@
     "inputs": {
       "prompt": "Put the white soccer jersey on the woman and keep the original background consistent including facial features. The woman is standing in a massive shower of red and white rectangular confetti filling the air. Confetti is flying everywhere. Maintain all the small details of the soccer jersey including color and the logos and the embossed pattern on the white fabric of the jersey: The base color of the jersey is white, with a visually dynamic design featuring fine, textured, geometric embossments across the torso and lower front. These raised patterns add depth and tactile quality to the fabric, suggesting a high-performance polyester blend, commonly used in modern football kits for moisture-wicking and breathability. The material appears to be lightweight and stretchable, tailored for athletic performance.\n\nThe bottom left part of the jersey is clean white with the embossed pattern without other elements.\n\nThe most striking element is the red chest band, which runs horizontally across the front. This band is stylized with jagged, fragmented edges and arrow-like design elements, giving it a contemporary, disruptive look while maintaining the club’s traditional red band motif. This chest band contains the white sponsor logo \"LBBW\" (Landesbank Baden-Württemberg), rendered in bold, capital letters with a double-equals sign in the middle.\n\nManufacturer Logo: On the right chest is the JAKO logo in red.\n\nAdditional Sponsor Logos: \n\nRight Sleeve: Displays the black two-line \"·he sol\" logo in lowercase Helvetica Bold font.\n\nShoulder Dot Detail:\nEach shoulder features a row of five red circles, the first one closest to the collar is the circular JAKO logomark, followed by four more red dots arranged in a row, each becoming progressively smaller.\n\nCollar and Cut:\nThe jersey has a modern V-neck collar with a slight cross-over construction at the sharp corner in the center, adding to the premium and sporty appearance.\n\nKeep face, hair and scenic photo background consistent.\nEnhance the facial details.\n",
       "aspect_ratio": "9:16",
-      "seed": 2048,
+      "seed": 737,
       "output_format": "png",
       "safety_tolerance": 2,
       "force_rerun": false,
@@ -177,7 +177,7 @@
   },
   "454": {
     "inputs": {
-      "text_input": "golden star and shield crest",
+      "text_input": "vfb left-chest shield crest",
       "task": "caption_to_phrase_grounding",
       "fill_mask": true,
       "keep_model_loaded": true,
@@ -185,7 +185,7 @@
       "num_beams": 3,
       "do_sample": true,
       "output_mask_select": "",
-      "seed": 295985036425943,
+      "seed": 222465515035823,
       "image": [
         "486",
         0
@@ -242,12 +242,12 @@
       "mask_expand_pixels": 3,
       "mask_invert": false,
       "mask_blend_pixels": 8,
-      "mask_hipass_filter": 0.1,
+      "mask_hipass_filter": 0.10000000000000002,
       "extend_for_outpainting": false,
       "extend_up_factor": 1.1600000000000001,
-      "extend_down_factor": 1,
-      "extend_left_factor": 1,
-      "extend_right_factor": 1,
+      "extend_down_factor": 1.0000000000000002,
+      "extend_left_factor": 1.0000000000000002,
+      "extend_right_factor": 1.0000000000000002,
       "context_from_mask_extend_factor": 1.0000000000000002,
       "output_resize_to_target_size": true,
       "output_target_width": 512,
@@ -336,37 +336,6 @@
       "title": "ReActor 🌌 Options"
     }
   },
-  "504": {
-    "inputs": {
-      "bbox_model_name": "bbox/face_yolov8m.pt",
-      "bbox_threshold": 0.8900000000000001,
-      "bbox_dilation": 10,
-      "bbox_crop_factor": 3,
-      "bbox_drop_size": 10,
-      "sam_model_name": "sam_vit_l_0b3195.pth",
-      "sam_dilation": 0,
-      "sam_threshold": 0.93,
-      "bbox_expansion": 0,
-      "mask_hint_threshold": 0.7,
-      "mask_hint_use_negative": "False",
-      "morphology_operation": "dilate",
-      "morphology_distance": 0,
-      "blur_radius": 9,
-      "sigma_factor": 1,
-      "image": [
-        "456",
-        0
-      ],
-      "swapped_image": [
-        "505",
-        0
-      ]
-    },
-    "class_type": "ReActorMaskHelper",
-    "_meta": {
-      "title": "ReActor 🌌 Masking Helper"
-    }
-  },
   "505": {
     "inputs": {
       "enabled": true,
@@ -374,7 +343,7 @@
       "facedetection": "retinaface_resnet50",
       "face_restore_model": "GFPGANv1.4.pth",
       "face_restore_visibility": 1,
-      "codeformer_weight": 0.5,
+      "codeformer_weight": 0.5000000000000001,
       "input_image": [
         "456",
         0
@@ -400,11 +369,11 @@
       "grain_sat": 0.30000000000000004,
       "grain_power": 0.15000000000000002,
       "shadows": 1,
-      "highs": 0.2,
+      "highs": 0.20000000000000004,
       "scale": 1.5000000000000002,
       "sharpen": 0,
-      "src_gamma": 1,
-      "seed": 1105222445176292,
+      "src_gamma": 1.0000000000000002,
+      "seed": 137393379007305,
       "image": [
         "507",
         0
@@ -421,7 +390,7 @@
       "height": 1920,
       "crop": "disabled",
       "images": [
-        "504",
+        "505",
         0
       ]
     },
@@ -430,71 +399,11 @@
       "title": "Scale Down"
     }
   },
-  "508": {
-    "inputs": {
-      "direction": "right",
-      "match_image_size": true,
-      "spacing_width": 0,
-      "spacing_color": "white",
-      "image1": [
-        "457",
-        1
-      ],
-      "image2": [
-        "537",
-        0
-      ]
-    },
-    "class_type": "ImageStitch",
-    "_meta": {
-      "title": "Image Stitch"
-    }
-  },
-  "509": {
-    "inputs": {
-      "direction": "right",
-      "match_image_size": true,
-      "spacing_width": 0,
-      "spacing_color": "white",
-      "image1": [
-        "508",
-        0
-      ],
-      "image2": [
-        "582",
-        0
-      ]
-    },
-    "class_type": "ImageStitch",
-    "_meta": {
-      "title": "Image Stitch"
-    }
-  },
-  "510": {
-    "inputs": {
-      "direction": "down",
-      "match_image_size": true,
-      "spacing_width": 0,
-      "spacing_color": "white",
-      "image1": [
-        "509",
-        0
-      ],
-      "image2": [
-        "506",
-        0
-      ]
-    },
-    "class_type": "ImageStitch",
-    "_meta": {
-      "title": "Image Stitch"
-    }
-  },
   "511": {
     "inputs": {
       "filename_prefix": "Vergleich_Test_Runde_1_",
       "images": [
-        "510",
+        "506",
         0
       ]
     },
@@ -518,7 +427,7 @@
   },
   "516": {
     "inputs": {
-      "seed": 1014018525072965,
+      "seed": 8353197748768,
       "steps": 20,
       "cfg": 1,
       "sampler_name": "euler",
@@ -651,7 +560,7 @@
     "inputs": {
       "lora_name": "crest.safetensors",
       "strength_model": 1.5400000000000003,
-      "strength_clip": 1,
+      "strength_clip": 1.0000000000000002,
       "model": [
         "531",
         0
@@ -679,7 +588,7 @@
   "537": {
     "inputs": {
       "method": "mkl",
-      "strength": 1,
+      "strength": 1.0000000000000002,
       "image_ref": [
         "457",
         1
